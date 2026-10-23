@@ -65,6 +65,7 @@ export interface FlexcilCanvasBoardState {
   paperStyle: CanvasPaperStyle;
   strokes: CanvasStroke[];
   notes: CanvasNoteItem[];
+  tapeMasks: { id: string; x: number; y: number; width: number; height: number; isRevealed: boolean }[];
   zoom: number;
   panX: number;
   panY: number;

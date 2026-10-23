@@ -229,6 +229,10 @@ export function FlexcilCanvasBoard({
   const [isPanning, setIsPanning] = useState<boolean>(false);
   const [panStart, setPanStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
+  // Tape Drawing State
+  const [isDrawingTape, setIsDrawingTape] = useState<boolean>(false);
+  const [tempTape, setTempTape] = useState<{ x: number; y: number; width: number; height: number } | null>(null);
+
   // Lasso selection results
   const [selectedStrokeIds, setSelectedStrokeIds] = useState<string[]>([]);
   const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
@@ -301,6 +305,7 @@ export function FlexcilCanvasBoard({
         paperStyle: state.paperStyle,
         strokes: state.strokes,
         notes: state.notes,
+        tapeMasks: state.tapeMasks,
         zoom: state.zoom,
         panX: state.pan.x,
         panY: state.pan.y,
@@ -320,12 +325,14 @@ export function FlexcilCanvasBoard({
           setPaperStyle(saved.paperStyle || "grid");
           setStrokes(saved.strokes || []);
           setNotes(saved.notes || []);
+          setTapeMasks(saved.tapeMasks || []);
           setZoom(saved.zoom || 1);
           setPan({ x: saved.panX || 0, y: saved.panY || 0 });
         } else {
           setPaperStyle("grid");
           setStrokes([]);
           setNotes([]);
+          setTapeMasks([]);
           setZoom(1);
           setPan({ x: 0, y: 0 });
         }
@@ -338,10 +345,10 @@ export function FlexcilCanvasBoard({
   }, [material.id]);
 
   // Synchronous Auto-Save on any exit
-  const latestStateRef = useRef({ strokes, notes, paperStyle, zoom, pan });
+  const latestStateRef = useRef({ strokes, notes, tapeMasks, paperStyle, zoom, pan });
   useEffect(() => {
-    latestStateRef.current = { strokes, notes, paperStyle, zoom, pan };
-  }, [strokes, notes, paperStyle, zoom, pan]);
+    latestStateRef.current = { strokes, notes, tapeMasks, paperStyle, zoom, pan };
+  }, [strokes, notes, tapeMasks, paperStyle, zoom, pan]);
 
   useEffect(() => {
     const handleExitSave = () => {
@@ -352,6 +359,7 @@ export function FlexcilCanvasBoard({
         paperStyle: state.paperStyle,
         strokes: state.strokes,
         notes: state.notes,
+        tapeMasks: state.tapeMasks,
         zoom: state.zoom,
         panX: state.pan.x,
         panY: state.pan.y,
@@ -380,19 +388,20 @@ export function FlexcilCanvasBoard({
   }, [material.id]);
 
   const saveCurrentState = useCallback(
-    (newStrokes: CanvasStroke[], newNotes: CanvasNoteItem[]) => {
+    (newStrokes: CanvasStroke[], newNotes: CanvasNoteItem[], newTapeMasks?: any[]) => {
       saveCanvasBoardToStorage({
         materialId: material.id,
         paperStyle,
         strokes: newStrokes,
         notes: newNotes,
+        tapeMasks: newTapeMasks || tapeMasks,
         zoom,
         panX: pan.x,
         panY: pan.y,
         updatedAt: new Date().toISOString(),
       });
     },
-    [material.id, paperStyle, zoom, pan]
+    [material.id, paperStyle, tapeMasks, zoom, pan]
   );
 
   const pushUndo = useCallback((prevStrokes: CanvasStroke[], prevNotes: CanvasNoteItem[]) => {
@@ -835,6 +844,14 @@ export function FlexcilCanvasBoard({
       ctx.restore();
     });
 
+    if (isDrawingTape && tempTape) {
+      ctx.save();
+      ctx.fillStyle = "#fbbf24";
+      ctx.globalAlpha = 0.6;
+      ctx.fillRect(tempTape.x, tempTape.y, tempTape.width, tempTape.height);
+      ctx.restore();
+    }
+
     ctx.restore();
   }, [
     strokes,
@@ -853,6 +870,8 @@ export function FlexcilCanvasBoard({
     selectedStrokeIds,
     selectedNoteIds,
     tapeMasks,
+    isDrawingTape,
+    tempTape,
   ]);
 
   const getCanvasCoords = (e: React.PointerEvent<HTMLCanvasElement> | MouseEvent<HTMLCanvasElement>): CanvasPoint => {
@@ -928,16 +947,8 @@ export function FlexcilCanvasBoard({
     }
 
     if (activeTool === "tape") {
-      const newTape = {
-        id: `tape_${Date.now()}`,
-        x: coords.x,
-        y: coords.y,
-        width: 140,
-        height: 32,
-        isRevealed: false,
-      };
-      setTapeMasks((prev) => [...prev, newTape]);
-      setActiveTool("select");
+      setIsDrawingTape(true);
+      setTempTape({ x: coords.x, y: coords.y, width: 0, height: 0 });
       return;
     }
 
@@ -1019,6 +1030,16 @@ export function FlexcilCanvasBoard({
       return;
     }
 
+    if (isDrawingTape && tempTape) {
+      const coords = getCanvasCoords(e);
+      setTempTape({
+        ...tempTape,
+        width: coords.x - tempTape.x,
+        height: coords.y - tempTape.y,
+      });
+      return;
+    }
+
     if (!isDrawing) return;
     const coords = getCanvasCoords(e);
 
@@ -1044,6 +1065,28 @@ export function FlexcilCanvasBoard({
 
     if (isPanning) {
       setIsPanning(false);
+      return;
+    }
+
+    if (isDrawingTape && tempTape) {
+      const width = Math.abs(tempTape.width);
+      const height = Math.abs(tempTape.height);
+      if (width > 10 && height > 10) {
+        const newTape = {
+          id: `tape_${Date.now()}`,
+          x: tempTape.width < 0 ? tempTape.x + tempTape.width : tempTape.x,
+          y: tempTape.height < 0 ? tempTape.y + tempTape.height : tempTape.y,
+          width,
+          height,
+          isRevealed: false,
+        };
+        const updated = [...tapeMasks, newTape];
+        setTapeMasks(updated);
+        saveCurrentState(strokes, notes, updated);
+      }
+      setIsDrawingTape(false);
+      setTempTape(null);
+      setActiveTool("select");
       return;
     }
 

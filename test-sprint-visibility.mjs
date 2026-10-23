@@ -11,8 +11,7 @@ async function runTests() {
   console.log("=================================================\n");
 
   const browser = await chromium.launch({ 
-    headless: true,
-    executablePath: "/ms-playwright/chromium_headless_shell-1247/chrome-headless-shell-linux64/chrome-headless-shell"
+    headless: true
   });
   const context = await browser.newContext();
   const page = await context.newPage();
