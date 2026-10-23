@@ -1,0 +1,246 @@
+{
+  "entities": {
+    "Material": {
+      "title": "Material",
+      "description": "Raw material entity ingested into Alfassa preserving original content and metadata",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique stable identifier starting with mat_",
+          "pattern": "^mat_[a-zA-Z0-9_-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the owning user"
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Associated workspace ID",
+          "pattern": "^wsp_[a-zA-Z0-9_-]+$"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title or original filename of the material",
+          "maxLength": 300
+        },
+        "type": {
+          "type": "string",
+          "description": "Detected material input type",
+          "enum": ["document", "image", "video", "audio", "link", "text", "file"]
+        },
+        "originalInput": {
+          "type": "object",
+          "description": "Preserved raw input source and content"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Technical metadata such as size, mimeType, extension, timestamps"
+        },
+        "status": {
+          "type": "string",
+          "description": "Intake lifecycle status",
+          "enum": ["raw", "intake_completed", "processing_failed"]
+        },
+        "pipeline": {
+          "type": "object",
+          "description": "Status flags preparing material for future Material Engine and Workspace Review"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["id", "userId", "workspaceId", "title", "type", "status", "createdAt", "updatedAt"]
+    },
+    "Activity": {
+      "title": "Activity",
+      "description": "Audit and activity event record for user actions",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique stable identifier starting with act_",
+          "pattern": "^act_[a-zA-Z0-9_-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the acting user"
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Associated workspace ID"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of activity event",
+          "enum": ["material_intake", "concept_created", "review_completed"]
+        },
+        "action": {
+          "type": "string",
+          "description": "Action performed (created, updated, deleted)",
+          "enum": ["created", "updated", "deleted"]
+        },
+        "entityId": {
+          "type": "string",
+          "description": "ID of the target entity"
+        },
+        "entityType": {
+          "type": "string",
+          "description": "Type of target entity",
+          "enum": ["material", "concept", "workspace"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable activity summary",
+          "maxLength": 500
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional context metadata"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of the event"
+        }
+      },
+      "required": ["id", "userId", "workspaceId", "type", "action", "entityId", "entityType", "description", "createdAt"]
+    },
+    "Concept": {
+      "title": "Concept",
+      "description": "Accepted and structured knowledge concept",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique stable identifier starting with cpt_"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner UID"
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Workspace ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the concept"
+        },
+        "summary": {
+          "type": "string",
+          "description": "High level concept summary"
+        },
+        "content": {
+          "type": "string",
+          "description": "Markdown body content of the concept"
+        },
+        "currentVersion": {
+          "type": "number",
+          "description": "Current active version sequence number"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "sourceMaterialIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "workspaceId", "title", "content", "currentVersion", "createdAt", "updatedAt"]
+    },
+    "ConceptVersion": {
+      "title": "ConceptVersion",
+      "description": "Immutable version snapshot of a concept",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "conceptId": { "type": "string" },
+        "version": { "type": "number" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "content": { "type": "string" },
+        "changeReason": { "type": "string" },
+        "sourceMaterialId": { "type": "string" },
+        "reviewId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "conceptId", "version", "userId", "title", "content", "changeReason", "createdAt"]
+    },
+    "KnowledgeRelationship": {
+      "title": "KnowledgeRelationship",
+      "description": "User confirmed semantic relationship between two concepts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "workspaceId": { "type": "string" },
+        "sourceConceptId": { "type": "string" },
+        "targetConceptId": { "type": "string" },
+        "relationType": { "type": "string", "enum": ["relates_to", "part_of", "prerequisite_for", "extends", "contradicts"] },
+        "description": { "type": "string" },
+        "isUserConfirmed": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "workspaceId", "sourceConceptId", "targetConceptId", "relationType", "isUserConfirmed", "createdAt", "updatedAt"]
+    },
+    "WorkspaceReview": {
+      "title": "WorkspaceReview",
+      "description": "Review entity mediating between extracted material and accepted knowledge",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "workspaceId": { "type": "string" },
+        "materialId": { "type": "string" },
+        "materialTitle": { "type": "string" },
+        "materialType": { "type": "string" },
+        "extractionId": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "in_review", "resolved"] },
+        "candidateConcepts": { "type": "array" },
+        "proposedRelationships": { "type": "array" },
+        "proposedChanges": { "type": "object" },
+        "userDecision": { "type": "object" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "resolvedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "workspaceId", "materialId", "extractionId", "status", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/materials/{materialId}": {
+      "schema": "Material",
+      "description": "User's raw ingested knowledge materials"
+    },
+    "/activities/{activityId}": {
+      "schema": "Activity",
+      "description": "Chronological audit log of user activities"
+    },
+    "/concepts/{conceptId}": {
+      "schema": "Concept",
+      "description": "Accepted user knowledge concepts"
+    },
+    "/concept_versions/{versionId}": {
+      "schema": "ConceptVersion",
+      "description": "Immutable version history snapshots of concepts"
+    },
+    "/knowledge_relationships/{relationshipId}": {
+      "schema": "KnowledgeRelationship",
+      "description": "Confirmed relationships connecting concepts"
+    },
+    "/workspace_reviews/{reviewId}": {
+      "schema": "WorkspaceReview",
+      "description": "Persistent Workspace Review records"
+    }
+  }
+}

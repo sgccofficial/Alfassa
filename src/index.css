@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Theme semantic colors for Tailwind v4 utility generation */
+  --color-bg-main: var(--bg-main);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-border-color: var(--border-color);
+  --color-border-subtle: var(--border-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-text: var(--accent-text);
+  --color-accent-highlight: var(--accent-highlight);
+
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+
+  --color-primary-50: var(--color-slate-50);
+  --color-primary-100: var(--color-slate-100);
+  --color-primary-200: var(--color-slate-200);
+  --color-primary-300: var(--color-slate-300);
+  --color-primary-400: var(--color-slate-400);
+  --color-primary-500: var(--color-slate-600);
+  --color-primary-600: var(--color-slate-700);
+  --color-primary-700: var(--color-slate-800);
+  --color-primary-800: var(--color-slate-900);
+  --color-primary-900: var(--color-slate-950);
+  --color-primary-950: #020617;
+}
+
+@layer base {
+  :root {
+    --bg-main: #F8FAFC;
+    --bg-surface: #FFFFFF;
+    --bg-subtle: #F1F5F9;
+    --border-color: #E2E8F0;
+    --border-subtle: #EDF2F7;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+
+    --accent-primary: #0F172A;
+    --accent-hover: #1E293B;
+    --accent-text: #FFFFFF;
+    --accent-highlight: #0F172A;
+
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-danger: #EF4444;
+  }
+
+  .dark {
+    --bg-main: #0B0F17;
+    --bg-surface: #131926;
+    --bg-subtle: #1A2234;
+    --border-color: #222F43;
+    --border-subtle: #182232;
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+
+    --accent-primary: #F8FAFC;
+    --accent-hover: #E2E8F0;
+    --accent-text: #0F172A;
+    --accent-highlight: #F8FAFC;
+
+    --color-success: #34D399;
+    --color-warning: #FBBF24;
+    --color-danger: #F87171;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .animate-text-sweep {
+    background: linear-gradient(
+      90deg,
+      #64748b 0%,
+      #0f172a 45%,
+      #ffffff 50%,
+      #0f172a 55%,
+      #64748b 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: sweep 3.2s linear infinite;
+  }
+}
+
+:is(.dark *) .animate-text-sweep,
+.dark .animate-text-sweep {
+  background: linear-gradient(
+    90deg,
+    #64748b 0%,
+    #cbd5e1 45%,
+    #ffffff 50%,
+    #cbd5e1 55%,
+    #64748b 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sweep 3.2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-text-sweep {
+    animation: none !important;
+    background: none !important;
+    -webkit-text-fill-color: var(--text-secondary) !important;
+    color: var(--text-secondary) !important;
+  }
+}
+
+@keyframes sweep {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

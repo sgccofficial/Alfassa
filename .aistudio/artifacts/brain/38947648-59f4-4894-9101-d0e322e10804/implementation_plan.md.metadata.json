@@ -1,0 +1,6 @@
+{
+  "summary":  "Implementation plan for Sprint 8K: Accepted Knowledge Integrity & Post-Decision Flow.\n\nFocusing on:\n1. Fixing relationship duplication when retrying decisions.\n2. Ensuring source attribution persistence.\n3. Stabilizing the post-decision flow consistency.",
+  "updatedAt":  "2026-10-12T07:15:13.810280828Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

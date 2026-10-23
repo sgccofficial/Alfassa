@@ -1,0 +1,164 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Hardened global helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation Blueprint for Material
+    function isValidMaterial(data) {
+      return data.keys().hasAll(['id', 'userId', 'workspaceId', 'title', 'type', 'status', 'createdAt', 'updatedAt'])
+        && data.id is string && isValidId(data.id)
+        && data.userId is string && data.userId == request.auth.uid
+        && data.workspaceId is string && data.workspaceId.size() <= 128
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 2000
+        && data.type in ['document', 'image', 'video', 'audio', 'link', 'text', 'file']
+        && data.status in ['raw', 'intake_completed', 'processing_failed', 'saving', 'uploading', 'upload_complete']
+        && data.createdAt is string && data.createdAt.size() <= 64
+        && data.updatedAt is string && data.updatedAt.size() <= 64;
+    }
+
+    // Validation Blueprint for Activity
+    function isValidActivity(data) {
+      return data.keys().hasAll(['id', 'userId', 'workspaceId', 'type', 'action', 'entityId', 'entityType', 'description', 'createdAt'])
+        && data.id is string && isValidId(data.id)
+        && data.userId is string && data.userId == request.auth.uid
+        && data.workspaceId is string && data.workspaceId.size() <= 128
+        && data.type in ['material_intake', 'concept_created', 'review_completed']
+        && data.action in ['created', 'updated', 'deleted']
+        && data.entityId is string && data.entityId.size() <= 128
+        && data.entityType in ['material', 'concept', 'workspace']
+        && data.description is string && data.description.size() <= 500
+        && data.createdAt is string && data.createdAt.size() <= 64;
+    }
+
+    // Validation Blueprint for Concept
+    function isValidConcept(data) {
+      return data.keys().hasAll(['id', 'userId', 'workspaceId', 'title', 'content', 'currentVersion', 'createdAt', 'updatedAt'])
+        && data.id is string && isValidId(data.id)
+        && data.userId is string && data.userId == request.auth.uid
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 300
+        && data.content is string
+        && data.currentVersion is number && data.currentVersion >= 1;
+    }
+
+    // Validation Blueprint for ConceptVersion (Immutable snapshot)
+    function isValidConceptVersion(data) {
+      return data.keys().hasAll(['id', 'conceptId', 'version', 'userId', 'title', 'content', 'changeReason', 'createdAt'])
+        && data.id is string && isValidId(data.id)
+        && data.userId is string && data.userId == request.auth.uid
+        && data.conceptId is string && isValidId(data.conceptId)
+        && data.version is number && data.version >= 1
+        && data.changeReason is string && data.changeReason.size() <= 500;
+    }
+
+    // Validation Blueprint for WorkspaceReview
+    function isValidWorkspaceReview(data) {
+      return data.keys().hasAll(['id', 'userId', 'workspaceId', 'materialId', 'extractionId', 'status', 'createdAt', 'updatedAt'])
+        && data.id is string && isValidId(data.id)
+        && data.userId is string && data.userId == request.auth.uid
+        && data.materialId is string && isValidId(data.materialId)
+        && data.extractionId is string && isValidId(data.extractionId)
+        && data.status in ['pending', 'in_review', 'resolved'];
+    }
+
+    // Collection: Materials
+    match /materials/{materialId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() 
+                    && isValidId(materialId) 
+                    && incoming().id == materialId
+                    && isValidMaterial(incoming());
+      allow update: if isSignedIn() 
+                    && isValidMaterial(incoming()) 
+                    && incoming().userId == existing().userId
+                    && incoming().id == existing().id;
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+
+    // Collection: Extractions
+    match /extractions/{extractionId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create, update: if isSignedIn() 
+                            && isValidId(extractionId)
+                            && incoming().userId == request.auth.uid;
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+
+    // Collection: Activities (Immutable audit log)
+    match /activities/{activityId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() 
+                    && isValidId(activityId) 
+                    && incoming().id == activityId
+                    && isValidActivity(incoming());
+      allow update, delete: if false;
+    }
+
+    // Collection: Concepts
+    match /concepts/{conceptId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() 
+                    && isValidId(conceptId) 
+                    && incoming().id == conceptId
+                    && isValidConcept(incoming());
+      allow update: if isSignedIn() 
+                    && isValidConcept(incoming()) 
+                    && incoming().userId == existing().userId
+                    && incoming().id == existing().id;
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+
+    // Collection: Concept Versions (Immutable history)
+    match /concept_versions/{versionId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() 
+                    && isValidId(versionId) 
+                    && incoming().id == versionId
+                    && isValidConceptVersion(incoming());
+      allow update, delete: if false; // Version history is strictly immutable
+    }
+
+    // Collection: Knowledge Relationships
+    match /knowledge_relationships/{relationshipId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create, update: if isSignedIn() 
+                            && isValidId(relationshipId)
+                            && incoming().userId == request.auth.uid;
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+
+    // Collection: Workspace Reviews
+    match /workspace_reviews/{reviewId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() 
+                    && isValidId(reviewId) 
+                    && incoming().id == reviewId
+                    && isValidWorkspaceReview(incoming());
+      allow update: if isSignedIn() 
+                    && isValidWorkspaceReview(incoming()) 
+                    && incoming().userId == existing().userId
+                    && incoming().id == existing().id;
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+  }
+}

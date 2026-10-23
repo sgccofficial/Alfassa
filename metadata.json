@@ -1,0 +1,6 @@
+{
+  "name": "Alfassa",
+  "description": "A study and material intake workspace with document, audio, and video verbatim extraction, clean review workflows, and durable storage.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
