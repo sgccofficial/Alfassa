@@ -8,6 +8,7 @@ export function getDefaultCanvasState(materialId: string): FlexcilCanvasBoardSta
     paperStyle: "grid",
     strokes: [],
     notes: [],
+    tapeMasks: [],
     zoom: 1,
     panX: 0,
     panY: 0,
