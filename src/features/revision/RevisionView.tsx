@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Brain, BookOpen, Edit3, Save } from "lucide-react";
+import { Brain, BookStack, Edit, FloppyDisk } from "iconoir-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../shared/providers/AuthProvider";
 import { Concept } from "../../types";
@@ -64,7 +64,7 @@ export function RevisionView() {
               onClick={handleSaveNote}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold bg-accent-highlight text-white"
             >
-              <Save size={16} />
+              <FloppyDisk size={16} />
               Save Note
             </button>
           </div>

@@ -1,5 +1,5 @@
 import { useState, FormEvent, useEffect, useRef } from "react";
-import { Globe, ArrowRight } from "lucide-react";
+import { Globe, ArrowRight } from "iconoir-react";
 import { isValidWebUrl } from "../../engines/material-engine/detector";
 import { Modal } from "../../shared/components/Modal";
 

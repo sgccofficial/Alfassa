@@ -1,5 +1,5 @@
 import React from "react";
-import { History } from "lucide-react";
+import { Timer } from "iconoir-react";
 
 interface ConceptHistoryCardProps {
   onOpenHistory: () => void;
@@ -18,7 +18,7 @@ export function ConceptHistoryCard({ onOpenHistory, versionCount }: ConceptHisto
           onClick={onOpenHistory}
           className="text-xs font-medium text-accent-highlight hover:text-accent-highlight/80 flex items-center gap-1 cursor-pointer"
         >
-          <History size={12} />
+          <Timer size={12} />
           <span>View All ({versionCount})</span>
         </button>
       </div>

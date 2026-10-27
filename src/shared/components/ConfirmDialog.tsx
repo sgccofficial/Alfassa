@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "./Modal";
-import { AlertTriangle } from "lucide-react";
+import { WarningTriangle } from "iconoir-react";
 
 interface ConfirmDialogProps {
   isOpen: boolean;
@@ -34,7 +34,7 @@ export function ConfirmDialog({
         <div className="flex items-start gap-3">
           {isDestructive && (
             <div className="p-2 rounded-xl bg-red-50 dark:bg-red-950/30 text-red-600 shrink-0">
-              <AlertTriangle size={20} />
+              <WarningTriangle size={20} />
             </div>
           )}
           <div className="space-y-1">

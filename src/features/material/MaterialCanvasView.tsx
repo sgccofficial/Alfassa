@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useSearchParams, useLocation, NavLink } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Loader2, Save, FileText, Check, Layers, Columns2, Layout, BookOpen, PenTool } from "lucide-react";
+import { ArrowLeft, ArrowRight, FloppyDisk, Page, Check, ViewColumns2, LayoutLeft, BookStack, EditPencil } from "iconoir-react";
+import { Loading } from "loading-dev";
 import { 
   Material, 
   MaterialExtraction, 
@@ -517,7 +518,7 @@ export function MaterialCanvasView() {
     return (
       <div id="material-canvas-loading" className="min-h-screen bg-bg-main flex items-center justify-center p-6">
         <div className="flex flex-col items-center gap-3 text-text-secondary">
-          <Loader2 className="animate-spin" size={24} />
+          <Loading  size={24} />
           <p className="text-sm">Opening material...</p>
         </div>
       </div>
@@ -611,7 +612,7 @@ export function MaterialCanvasView() {
             }`}
             title="Save changes"
           >
-            {isSaving ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />}
+            {isSaving ? <Loading size={13}  /> : <FloppyDisk size={13} />}
             <span>Save</span>
           </button>
         </div>
@@ -699,7 +700,7 @@ export function MaterialCanvasView() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <FileText size={16} strokeWidth={1.75} className="text-text-muted" />
+                    <Page size={16} strokeWidth={1.75} className="text-text-muted" />
                     <h3 className="text-sm font-bold text-text-primary">Review Details</h3>
                   </div>
                 </div>

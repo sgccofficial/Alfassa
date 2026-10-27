@@ -1,37 +1,18 @@
 import { NavLink } from "react-router-dom";
 import { cn } from "../utils/cn";
-import { 
-  Home, 
-  Search, 
-  FolderTree, 
-  Layers, 
-  Briefcase, 
-  Network, 
-  Brain, 
-  Compass, 
-  Activity, 
-  Star, 
-  Settings,
-  PanelLeftClose,
-  PanelLeftOpen,
-  CheckSquare,
-  BookOpen,
-  Sun,
-  Moon,
-  PenTool
-} from "lucide-react";
+import { Home, Search, Folder, ViewColumns2, Suitcase, NetworkRight, Brain, Compass, Activity, Star, Settings, SidebarCollapse, SidebarExpand, CheckSquare, BookStack, SunLight, HalfMoon, EditPencil } from "iconoir-react";
 import { useState } from "react";
 import { useTheme } from "../providers/ThemeProvider";
 
 const navItems = [
   { name: "Home", path: "/", icon: Home },
-  { name: "Canvas", path: "/canvas", icon: PenTool },
-  { name: "Concepts", path: "/concepts", icon: BookOpen },
+  { name: "Canvas", path: "/canvas", icon: EditPencil },
+  { name: "Concepts", path: "/concepts", icon: BookStack },
   { name: "Search", path: "/search", icon: Search },
-  { name: "Folders", path: "/folders", icon: FolderTree },
-  { name: "Collections", path: "/collections", icon: Layers },
-  { name: "Projects", path: "/projects", icon: Briefcase },
-  { name: "Knowledge Graph", path: "/graph", icon: Network },
+  { name: "Folders", path: "/folders", icon: Folder },
+  { name: "Collections", path: "/collections", icon: ViewColumns2 },
+  { name: "Projects", path: "/projects", icon: Suitcase },
+  { name: "Knowledge Graph", path: "/graph", icon: NetworkRight },
   { name: "Revision", path: "/revision", icon: Brain },
   { name: "Explore", path: "/explore", icon: Compass },
   { name: "Activity", path: "/activity", icon: Activity },
@@ -61,7 +42,7 @@ export function Sidebar() {
           className="p-1.5 hover:bg-bg-subtle rounded-lg text-text-secondary hover:text-text-primary transition-colors cursor-pointer shrink-0"
           aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
         >
-          {expanded ? <PanelLeftClose size={17} strokeWidth={1.75} /> : <PanelLeftOpen size={17} strokeWidth={1.75} />}
+          {expanded ? <SidebarCollapse size={17} strokeWidth={1.75} /> : <SidebarExpand size={17} strokeWidth={1.75} />}
         </button>
       </div>
 
@@ -93,9 +74,9 @@ export function Sidebar() {
           title={!expanded ? `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode` : undefined}
         >
           {theme === 'dark' ? (
-            <Sun size={18} strokeWidth={1.75} className="shrink-0 text-amber-400" />
+            <SunLight size={18} strokeWidth={1.75} className="shrink-0 text-amber-400" />
           ) : (
-            <Moon size={18} strokeWidth={1.75} className="shrink-0 text-slate-600" />
+            <HalfMoon size={18} strokeWidth={1.75} className="shrink-0 text-slate-600" />
           )}
           {expanded && (
             <span className="ml-3 truncate">

@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { Home, PenTool, Search, FolderTree, Network, Settings } from "lucide-react";
+import { Home, EditPencil, Search, Folder, NetworkRight, Settings } from "iconoir-react";
 import { cn } from "../utils/cn";
 
 const mobileNavItems = [
   { name: "Home", path: "/", icon: Home },
-  { name: "Canvas", path: "/canvas", icon: PenTool },
+  { name: "Canvas", path: "/canvas", icon: EditPencil },
   { name: "Search", path: "/search", icon: Search },
-  { name: "Folders", path: "/folders", icon: FolderTree },
+  { name: "Folders", path: "/folders", icon: Folder },
   { name: "Settings", path: "/settings", icon: Settings },
 ];
 

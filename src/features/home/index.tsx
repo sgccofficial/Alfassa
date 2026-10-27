@@ -1,19 +1,6 @@
 import { useState, useRef, useEffect, useCallback, DragEvent, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  FileText, 
-  Image, 
-  Video, 
-  Mic, 
-  Globe, 
-  Paperclip, 
-  Search, 
-  Bell, 
-  User, 
-  ArrowUpRight,
-  CheckSquare,
-  BookOpen
-} from "lucide-react";
+import { Page, MediaImage, MediaVideo, Microphone, Globe, Attachment, Search, Bell, User, ArrowUpRight, CheckSquare, BookStack } from "iconoir-react";
 import { useAuth } from "../../shared/providers/AuthProvider";
 import { 
   useMaterialIntake, 
@@ -101,18 +88,18 @@ function renderMaterialStatusBadge(mat: Material) {
 function getMaterialIcon(type?: MaterialType) {
   switch (type) {
     case "image":
-      return <Image size={18} strokeWidth={1.5} />;
+      return <MediaImage size={18} strokeWidth={1.5} />;
     case "video":
-      return <Video size={18} strokeWidth={1.5} />;
+      return <MediaVideo size={18} strokeWidth={1.5} />;
     case "audio":
-      return <Mic size={18} strokeWidth={1.5} />;
+      return <Microphone size={18} strokeWidth={1.5} />;
     case "link":
       return <Globe size={18} strokeWidth={1.5} />;
     case "document":
     case "text":
-      return <FileText size={18} strokeWidth={1.5} />;
+      return <Page size={18} strokeWidth={1.5} />;
     default:
-      return <Paperclip size={18} strokeWidth={1.5} />;
+      return <Attachment size={18} strokeWidth={1.5} />;
   }
 }
 
@@ -394,7 +381,7 @@ export function Home() {
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5 min-w-0 flex-1">
                     <div className="p-1.5 rounded-md bg-bg-subtle text-text-primary shrink-0">
-                      <FileText size={16} strokeWidth={1.75} />
+                      <Page size={16} strokeWidth={1.75} />
                     </div>
                     <p className="font-semibold text-text-primary text-xs sm:text-sm truncate min-w-0 flex-1">
                       Lens Anatomy
@@ -469,7 +456,7 @@ export function Home() {
                   aria-label="Upload Document"
                   title="Upload Document (.pdf, .doc, .txt, .md)"
                 >
-                  <FileText strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
+                  <Page strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
                   <span className="text-[11px] font-medium mt-1.5">Docs</span>
                 </button>
 
@@ -481,7 +468,7 @@ export function Home() {
                   aria-label="Upload Image"
                   title="Upload Image"
                 >
-                  <Image strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
+                  <MediaImage strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
                   <span className="text-[11px] font-medium mt-1.5">Images</span>
                 </button>
 
@@ -493,7 +480,7 @@ export function Home() {
                   aria-label="Upload Video"
                   title="Upload Video"
                 >
-                  <Video strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
+                  <MediaVideo strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
                   <span className="text-[11px] font-medium mt-1.5">Video</span>
                 </button>
 
@@ -505,7 +492,7 @@ export function Home() {
                   aria-label="Record Voice"
                   title="Record Voice Note"
                 >
-                  <Mic strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
+                  <Microphone strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
                   <span className="text-[11px] font-medium mt-1.5">Audio</span>
                 </button>
 
@@ -529,7 +516,7 @@ export function Home() {
                   aria-label="Add File"
                   title="Any File Attachment"
                 >
-                  <Paperclip strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
+                  <Attachment strokeWidth={1.75} size={20} className="shrink-0 group-hover/btn:text-text-primary transition-colors" />
                   <span className="text-[11px] font-medium mt-1.5">File</span>
                 </button>
               </div>

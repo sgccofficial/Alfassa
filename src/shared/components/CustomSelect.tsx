@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ChevronDown, Check } from "lucide-react";
+import { NavArrowDown, Check } from "iconoir-react";
 
 export interface CustomSelectOption {
   value: string;
@@ -74,7 +74,7 @@ export function CustomSelect({
         <span className={`truncate ${selectedOption ? "font-medium text-text-primary" : "text-text-muted"}`}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
-        <ChevronDown size={14} className={`text-text-muted shrink-0 transition-transform duration-150 ${isOpen ? "rotate-180" : ""}`} />
+        <NavArrowDown size={14} className={`text-text-muted shrink-0 transition-transform duration-150 ${isOpen ? "rotate-180" : ""}`} />
       </button>
 
       {/* Dropdown Menu Popover */}

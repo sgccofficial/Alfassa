@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  BookOpen, 
-  Search, 
-  Paperclip, 
-  GitFork, 
-  ArrowRight, 
-  Layers, 
-  CheckSquare, 
-  Sparkles,
-  Clock
-} from "lucide-react";
+import { BookStack, Search, Attachment, GitFork, ArrowRight, ViewColumns2, CheckSquare, Sparks, Clock } from "iconoir-react";
 import { useAuth } from "../../shared/providers/AuthProvider";
 import { Concept, Material, KnowledgeRelationship } from "../../types";
 import { 
@@ -82,7 +72,7 @@ export function ConceptsListView() {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="p-1.5 rounded-lg bg-bg-surface border border-border-color text-text-primary">
-              <BookOpen size={18} strokeWidth={1.75} />
+              <BookStack size={18} strokeWidth={1.75} />
             </span>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-text-primary">
               Knowledge Base
@@ -113,7 +103,7 @@ export function ConceptsListView() {
       {filteredConcepts.length === 0 ? (
         <div className="bg-bg-surface border border-border-color rounded-2xl p-10 text-center max-w-lg mx-auto shadow-2xs space-y-3">
           <div className="w-12 h-12 rounded-2xl bg-bg-subtle border border-border-color flex items-center justify-center mx-auto text-text-muted">
-            <BookOpen size={24} strokeWidth={1.5} />
+            <BookStack size={24} strokeWidth={1.5} />
           </div>
           <h2 className="text-sm font-bold text-text-primary">
             {searchQuery ? "No matching concepts" : "No accepted concepts yet"}
@@ -174,7 +164,7 @@ export function ConceptsListView() {
                 <div className="pt-4 mt-3 border-t border-border-color/60 flex items-center justify-between text-[11px] text-text-muted">
                   <div className="flex items-center gap-2.5">
                     <span className="inline-flex items-center gap-1" title={`${sourceCount} contributing source materials`}>
-                      <Paperclip size={12} />
+                      <Attachment size={12} />
                       <span>{sourceCount}</span>
                     </span>
                     {relCount > 0 && (

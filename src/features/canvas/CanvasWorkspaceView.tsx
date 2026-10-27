@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
-import { 
-  PenTool, 
-  BookOpen, 
-  Layers, 
-  Loader2, 
-  ChevronDown, 
-  FileText, 
-  Plus, 
-  Search, 
-  Sparkles,
-  ExternalLink,
-  X,
-  Layout,
-  Columns2
-} from "lucide-react";
+import { EditPencil, BookStack, ViewColumns2, NavArrowDown, Page, Plus, Search, Sparks, OpenInWindow, Xmark, LayoutLeft } from "iconoir-react";
+import { Loading } from "loading-dev";
 import { Material, MaterialExtraction } from "../../types";
 import { useAuth } from "../../shared/providers/AuthProvider";
 import { getMaterialFromDb, subscribeToUserMaterials } from "../../services/material-db";
@@ -161,7 +148,7 @@ export function CanvasWorkspaceView() {
             className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer shrink-0"
             title="Return to Home"
           >
-            <PenTool size={16} className="text-blue-500" />
+            <EditPencil size={16} className="text-blue-500" />
           </button>
 
           <div className="relative">
@@ -170,9 +157,9 @@ export function CanvasWorkspaceView() {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="h-7 px-2.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700/70 text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer max-w-[220px]"
             >
-              <FileText size={13} className="text-blue-400 shrink-0" />
+              <Page size={13} className="text-blue-400 shrink-0" />
               <span className="truncate text-slate-200">{selectedMaterial.title}</span>
-              <ChevronDown size={12} className="text-slate-400 shrink-0" />
+              <NavArrowDown size={12} className="text-slate-400 shrink-0" />
             </button>
 
             {isDropdownOpen && (
@@ -228,7 +215,7 @@ export function CanvasWorkspaceView() {
             }`}
             title="Original File Reader View"
           >
-            <BookOpen size={13} />
+            <BookStack size={13} />
             <span className="hidden sm:inline">File Reader</span>
           </button>
 
@@ -242,7 +229,7 @@ export function CanvasWorkspaceView() {
             }`}
             title="Infinite Canvas Board"
           >
-            <Layout size={13} />
+            <LayoutLeft size={13} />
             <span className="hidden sm:inline">Infinite Canvas</span>
           </button>
 
@@ -256,7 +243,7 @@ export function CanvasWorkspaceView() {
             }`}
             title="Side-by-Side Split View"
           >
-            <Columns2 size={13} />
+            <ViewColumns2 size={13} />
             <span className="hidden sm:inline">Split View</span>
           </button>
         </div>
@@ -278,7 +265,7 @@ export function CanvasWorkspaceView() {
         {isLoading ? (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-slate-950">
             <div className="flex flex-col items-center gap-2 text-slate-400">
-              <Loader2 className="animate-spin" size={24} />
+              <Loading  size={24} />
               <p className="text-xs font-semibold">Opening Workspace...</p>
             </div>
           </div>

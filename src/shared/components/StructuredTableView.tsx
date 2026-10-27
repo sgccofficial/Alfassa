@@ -1,6 +1,6 @@
 import React from "react";
 import { ExtractedTable } from "../../types";
-import { Table as TableIcon } from "lucide-react";
+import { Table as TableIcon } from "iconoir-react";
 
 interface StructuredTableViewProps {
   tables: ExtractedTable[];

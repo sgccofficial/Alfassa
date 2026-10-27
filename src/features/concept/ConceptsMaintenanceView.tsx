@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Wrench, AlertTriangle, CheckCircle, RefreshCcw } from "lucide-react";
+import { Wrench, WarningTriangle, CheckCircle, Refresh } from "iconoir-react";
 
 export function ConceptsMaintenanceView() {
   const [isFixing, setIsFixing] = useState(false);
@@ -31,7 +31,7 @@ export function ConceptsMaintenanceView() {
           disabled={isFixing}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-bg-main border border-border-color text-text-primary hover:bg-bg-subtle transition-colors cursor-pointer disabled:opacity-50"
         >
-          {isFixing ? <RefreshCcw size={16} className="animate-spin" /> : <Wrench size={16} />}
+          {isFixing ? <Refresh size={16} className="animate-spin" /> : <Wrench size={16} />}
           <span>Run Integrity Audit</span>
         </button>
       </div>

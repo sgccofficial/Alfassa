@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import { 
-  FileText, 
-  Layers, 
-  AlignLeft, 
-  Copy, 
-  Check, 
-  ChevronDown, 
-  ChevronUp,
-  Table as TableIcon
-} from "lucide-react";
+import { Page, ViewColumns2, AlignLeft, Copy, Check, NavArrowDown, NavArrowUp, Table as TableIcon } from "iconoir-react";
 import { MaterialExtraction } from "../../../types";
 import { StructuredTableView } from "../../../shared/components/StructuredTableView";
 
@@ -36,7 +27,7 @@ export function ExtractedRepresentationPane({ extraction }: ExtractedRepresentat
     return (
       <div className="bg-bg-surface border border-border-color rounded-xl p-4 sm:p-5 space-y-2 shadow-2xs">
         <div className="flex items-center gap-2">
-          <FileText size={16} strokeWidth={1.75} className="text-text-muted" />
+          <Page size={16} strokeWidth={1.75} className="text-text-muted" />
           <h3 className="text-sm font-bold text-text-primary">Extracted Content</h3>
         </div>
         <p className="text-xs text-text-muted">No extracted content available.</p>
@@ -59,7 +50,7 @@ export function ExtractedRepresentationPane({ extraction }: ExtractedRepresentat
       {/* Pane Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <FileText size={16} strokeWidth={1.75} className="text-text-muted" />
+          <Page size={16} strokeWidth={1.75} className="text-text-muted" />
           <h3 className="text-sm font-bold text-text-primary">Extracted Content</h3>
         </div>
 
@@ -72,7 +63,7 @@ export function ExtractedRepresentationPane({ extraction }: ExtractedRepresentat
       {headings.length > 0 && (
         <div className="space-y-1.5">
           <span className="text-xs font-semibold text-text-primary flex items-center gap-1.5">
-            <Layers size={13} strokeWidth={1.75} />
+            <ViewColumns2 size={13} strokeWidth={1.75} />
             Outline ({headings.length})
           </span>
           <div className="flex flex-wrap gap-1.5 max-h-[100px] overflow-y-auto p-2 bg-bg-subtle rounded-lg border border-border-color">
@@ -134,7 +125,7 @@ export function ExtractedRepresentationPane({ extraction }: ExtractedRepresentat
                   className="text-[11px] text-accent-highlight hover:underline flex items-center gap-0.5 cursor-pointer font-medium"
                 >
                   {showFullText ? "Collapse" : "Expand"}
-                  {showFullText ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+                  {showFullText ? <NavArrowUp size={12} /> : <NavArrowDown size={12} />}
                 </button>
               )}
               <button

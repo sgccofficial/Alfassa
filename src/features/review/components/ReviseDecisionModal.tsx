@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, CheckCircle2, Check, History } from "lucide-react";
+import { Xmark, CheckCircle, Check, Timer } from "iconoir-react";
 import { 
   WorkspaceReview, 
   Concept, 
@@ -144,7 +144,7 @@ export function ReviseDecisionModal({
             onClick={onClose}
             className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-subtle transition-colors cursor-pointer"
           >
-            <X size={16} />
+            <Xmark size={16} />
           </button>
         </div>
 
@@ -167,7 +167,7 @@ export function ReviseDecisionModal({
                 }}
                 className="text-[11px] text-accent-highlight hover:underline flex items-center gap-1 shrink-0 cursor-pointer font-medium"
               >
-                <History size={12} />
+                <Timer size={12} />
                 Prior history ({review.decisionHistory.length})
               </button>
             )}
@@ -206,7 +206,7 @@ export function ReviseDecisionModal({
                           Current
                         </span>
                       ) : isSelected ? (
-                        <CheckCircle2 size={14} className="text-slate-900 dark:text-slate-100" />
+                        <CheckCircle size={14} className="text-slate-900 dark:text-slate-100" />
                       ) : null}
                     </div>
                     <p className="text-[11px] text-text-muted">
@@ -245,7 +245,7 @@ export function ReviseDecisionModal({
                           Current
                         </span>
                       ) : isSelected ? (
-                        <CheckCircle2 size={14} className="text-slate-900 dark:text-slate-100" />
+                        <CheckCircle size={14} className="text-slate-900 dark:text-slate-100" />
                       ) : null}
                     </div>
                     <p className="text-[11px] text-text-muted">

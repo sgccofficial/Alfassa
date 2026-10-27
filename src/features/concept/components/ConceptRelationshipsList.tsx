@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  GitFork, 
-  Plus, 
-  Trash2, 
-  ArrowRight, 
-  X, 
-  Check, 
-  Link as LinkIcon 
-} from "lucide-react";
+import { GitFork, Plus, Trash, ArrowRight, Xmark, Check, Link as LinkIcon } from "iconoir-react";
 import { Concept, KnowledgeRelationship, KnowledgeRelationType } from "../../../types";
 import { Select } from "../../../shared/components/Select";
 
@@ -133,7 +125,7 @@ export function ConceptRelationshipsList({
               onClick={() => setIsAdding(false)}
               className="text-text-muted hover:text-text-primary transition-colors cursor-pointer"
             >
-              <X size={14} />
+              <Xmark size={14} />
             </button>
           </div>
 
@@ -252,7 +244,7 @@ export function ConceptRelationshipsList({
                     title="Remove relationship"
                     aria-label="Remove relationship"
                   >
-                    <Trash2 size={13} strokeWidth={1.75} />
+                    <Trash size={13} strokeWidth={1.75} />
                   </button>
                 )}
               </div>

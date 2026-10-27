@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import { 
-  Network, 
-  Plus, 
-  Trash2, 
-  Edit2, 
-  Check, 
-  ArrowRight
-} from "lucide-react";
+import { NetworkRight, Plus, Trash, Edit, Check, ArrowRight } from "iconoir-react";
 import { ProposedRelationship, KnowledgeRelationType, Concept } from "../../../types";
 import { Select } from "../../../shared/components/Select";
 
@@ -113,7 +106,7 @@ export function ProposedRelationshipsEditor({
       {/* Pane Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Network size={16} strokeWidth={1.75} className="text-text-muted" />
+          <NetworkRight size={16} strokeWidth={1.75} className="text-text-muted" />
           <h3 className="text-sm font-bold text-text-primary">Relationships</h3>
         </div>
 
@@ -260,14 +253,14 @@ export function ProposedRelationshipsEditor({
                       className="p-1 rounded text-text-muted hover:text-text-primary hover:bg-bg-surface cursor-pointer"
                       title={isEditing ? "Done editing" : "Edit relationship"}
                     >
-                      {isEditing ? <Check size={13} className="text-emerald-500" /> : <Edit2 size={13} />}
+                      {isEditing ? <Check size={13} className="text-emerald-500" /> : <Edit size={13} />}
                     </button>
                     <button
                       onClick={() => handleRemoveRelationship(rel.id)}
                       className="p-1 rounded text-text-muted hover:text-rose-500 hover:bg-rose-500/10 cursor-pointer"
                       title="Remove relationship"
                     >
-                      <Trash2 size={13} />
+                      <Trash size={13} />
                     </button>
                   </div>
                 </div>

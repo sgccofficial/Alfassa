@@ -1,27 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  FileText, 
-  Image as ImageIcon, 
-  Video as VideoIcon, 
-  Mic, 
-  Globe, 
-  Paperclip, 
-  ExternalLink,
-  Copy,
-  Check,
-  AlignLeft,
-  Layers,
-  RefreshCw,
-  Download,
-  AlertCircle
-} from "lucide-react";
+import { Page, MediaImage as ImageIcon, MediaVideo as VideoIcon, Microphone, Globe, Attachment, OpenInWindow, Copy, Check, AlignLeft, ViewColumns2, Refresh, Download, WarningCircle } from "iconoir-react";
 import { Material, MaterialExtraction } from "../../../types";
 import { useMaterialOriginalFile } from "../../../services/material-file-loader";
 import { sanitizeOcrText } from "../../../shared/utils/ocr-sanitizer";
 import { StructuredTableView } from "../../../shared/components/StructuredTableView";
 import { PdfInlinePreview } from "../../material/PdfInlinePreview";
-import { Table as TableIcon } from "lucide-react";
+import { Table as TableIcon } from "iconoir-react";
 
 interface SourceMaterialPaneProps {
   material: Material;
@@ -88,12 +73,12 @@ export function SourceMaterialPane({
 
   const getIcon = () => {
     switch (material.type) {
-      case "document": return <FileText size={18} strokeWidth={1.5} />;
+      case "document": return <Page size={18} strokeWidth={1.5} />;
       case "image": return <ImageIcon size={18} strokeWidth={1.5} />;
       case "video": return <VideoIcon size={18} strokeWidth={1.5} />;
-      case "audio": return <Mic size={18} strokeWidth={1.5} />;
+      case "audio": return <Microphone size={18} strokeWidth={1.5} />;
       case "link": return <Globe size={18} strokeWidth={1.5} />;
-      default: return <Paperclip size={18} strokeWidth={1.5} />;
+      default: return <Attachment size={18} strokeWidth={1.5} />;
     }
   };
 
@@ -165,7 +150,7 @@ export function SourceMaterialPane({
             className="h-7 px-2.5 rounded-lg text-xs font-semibold bg-bg-surface hover:bg-bg-subtle border border-border-color text-text-primary transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
             title="Open Material Canvas editing tools"
           >
-            <Layers size={13} className="text-text-muted" />
+            <ViewColumns2 size={13} className="text-text-muted" />
             <span>Open Canvas</span>
           </button>
 
@@ -203,7 +188,7 @@ export function SourceMaterialPane({
           {/* Loading state while retrieving original file binary (Requirement 9) */}
           {isFileLoading && !material.originalInput?.rawContent && material.type !== "link" && (
             <div className="p-10 rounded-lg bg-bg-subtle border border-border-color flex flex-col items-center justify-center min-h-[300px] text-text-muted text-xs gap-3">
-              <RefreshCw size={20} className="animate-spin text-text-muted" />
+              <Refresh size={20} className="animate-spin text-text-muted" />
               <p>Loading original file…</p>
             </div>
           )}
@@ -212,7 +197,7 @@ export function SourceMaterialPane({
           {!isFileLoading && !isPdf && (!mediaSource || fileError) && !material.originalInput?.rawContent && material.type !== "link" && (
             <div className="p-8 rounded-lg bg-bg-subtle border border-border-color flex flex-col items-center justify-center min-h-[260px] text-center gap-3 max-w-md mx-auto">
               <div className="p-2.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
-                <AlertCircle size={22} />
+                <WarningCircle size={22} />
               </div>
               <div className="space-y-1">
                 <h4 className="text-sm font-semibold text-text-primary">
@@ -224,7 +209,7 @@ export function SourceMaterialPane({
                 onClick={retryFileLoad}
                 className="h-8 px-3.5 rounded-lg text-xs font-semibold bg-bg-surface border border-border-color text-text-primary hover:bg-bg-subtle transition-colors cursor-pointer inline-flex items-center gap-1.5"
               >
-                <RefreshCw size={13} />
+                <Refresh size={13} />
                 <span>Retry</span>
               </button>
             </div>
@@ -258,7 +243,7 @@ export function SourceMaterialPane({
           {!isFileLoading && !isPdf && isDocumentType && mediaSource && !material.originalInput?.rawContent && (
             <div className="p-8 rounded-lg bg-bg-subtle border border-border-color flex flex-col items-center justify-center gap-3 text-center">
               <div className="p-2.5 rounded-lg bg-bg-surface border border-border-color text-text-primary">
-                <FileText size={24} strokeWidth={1.75} />
+                <Page size={24} strokeWidth={1.75} />
               </div>
               <div className="space-y-0.5">
                 <h4 className="text-xs sm:text-sm font-semibold text-text-primary">
@@ -277,7 +262,7 @@ export function SourceMaterialPane({
                   }}
                   className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg text-xs font-semibold bg-bg-surface hover:bg-bg-subtle border border-border-color text-text-primary transition-colors cursor-pointer"
                 >
-                  <Layers size={13} className="text-text-muted" />
+                  <ViewColumns2 size={13} className="text-text-muted" />
                   <span>Open Canvas</span>
                 </button>
                 <a
@@ -319,7 +304,7 @@ export function SourceMaterialPane({
                 className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-surface transition-colors cursor-pointer"
                 title="Open link"
               >
-                <ExternalLink size={14} />
+                <OpenInWindow size={14} />
               </a>
             </div>
           )}
@@ -353,7 +338,7 @@ export function SourceMaterialPane({
           {headings.length > 0 && (
             <div className="space-y-1.5">
               <span className="text-xs font-semibold text-text-primary flex items-center gap-1.5">
-                <Layers size={13} strokeWidth={1.75} />
+                <ViewColumns2 size={13} strokeWidth={1.75} />
                 Outline ({headings.length})
               </span>
               <div className="flex flex-wrap gap-1.5 max-h-[140px] overflow-y-auto p-2 bg-bg-subtle rounded-lg border border-border-color">
@@ -373,7 +358,7 @@ export function SourceMaterialPane({
           {effectiveStatus === "processing" ? (
             <div className="p-8 rounded-lg bg-bg-subtle border border-border-color text-center space-y-2">
               <div className="inline-flex p-2.5 rounded-full bg-bg-surface border border-border-color text-text-primary">
-                <RefreshCw size={18} className="animate-spin" />
+                <Refresh size={18} className="animate-spin" />
               </div>
               <p className="text-xs sm:text-sm font-semibold text-text-primary">{processingMessage}</p>
             </div>
@@ -383,7 +368,7 @@ export function SourceMaterialPane({
               {effectiveStatus === "partially_completed" && (
                 <div className="flex items-center justify-between p-2.5 rounded-lg bg-bg-subtle border border-border-color text-xs text-text-secondary">
                   <div className="flex items-center gap-1.5">
-                    <AlertCircle size={14} className="text-amber-500 shrink-0" />
+                    <WarningCircle size={14} className="text-amber-500 shrink-0" />
                     <span>{partialMessage}</span>
                   </div>
                   {onReprocess && (
@@ -393,7 +378,7 @@ export function SourceMaterialPane({
                       disabled={isReprocessing}
                       className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border border-border-color bg-bg-surface hover:bg-bg-subtle text-text-primary transition-colors cursor-pointer"
                     >
-                      <RefreshCw size={10} className={isReprocessing ? "animate-spin" : ""} />
+                      <Refresh size={10} className={isReprocessing ? "animate-spin" : ""} />
                       <span>Retry</span>
                     </button>
                   )}
