@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import { 
-  History, 
-  X, 
-  CheckCircle2, 
-  Clock, 
-  ArrowLeft,
-  FileText 
-} from "lucide-react";
+import { Timer, Xmark, CheckCircle, Clock, ArrowLeft, Page } from "iconoir-react";
 import { ConceptVersion } from "../../../types";
 
 interface ConceptVersionHistoryModalProps {
@@ -67,7 +60,7 @@ export function ConceptVersionHistoryModal({
                 <ArrowLeft size={16} />
               </button>
             ) : (
-              <History size={18} strokeWidth={1.75} className="text-text-muted" />
+              <Timer size={18} strokeWidth={1.75} className="text-text-muted" />
             )}
             <h2 className="text-sm font-bold text-text-primary">
               {selectedSnapshot 
@@ -81,7 +74,7 @@ export function ConceptVersionHistoryModal({
             className="p-1.5 text-text-muted hover:text-text-primary rounded-lg hover:bg-bg-subtle transition-colors cursor-pointer"
             aria-label="Close"
           >
-            <X size={16} />
+            <Xmark size={16} />
           </button>
         </div>
 
@@ -142,7 +135,7 @@ export function ConceptVersionHistoryModal({
                   onClick={() => handleRestoreVersion(selectedSnapshot)}
                   className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-bg-surface border border-border-color text-text-primary hover:bg-bg-subtle transition-colors cursor-pointer"
                 >
-                  <History size={14} />
+                  <Timer size={14} />
                   <span>Restore this version (creates new version)</span>
                 </button>
               </div>
@@ -179,7 +172,7 @@ export function ConceptVersionHistoryModal({
                             </span>
                             {isCurrent && (
                               <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300">
-                                <CheckCircle2 size={10} />
+                                <CheckCircle size={10} />
                                 <span>Current</span>
                               </span>
                             )}

@@ -1,14 +1,5 @@
 import React from "react";
-import { 
-  X, 
-  History, 
-  CheckCircle2, 
-  Calendar, 
-  GitCommit, 
-  FileText, 
-  Layers,
-  ArrowRight
-} from "lucide-react";
+import { Xmark, Timer, CheckCircle, Calendar, GitCommit, Page, ViewColumns2, ArrowRight } from "iconoir-react";
 import { WorkspaceReview, UserDecisionRecord } from "../../../types";
 
 interface DecisionHistoryModalProps {
@@ -32,14 +23,14 @@ export function DecisionHistoryModal({
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-border-color flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <History size={16} strokeWidth={1.75} className="text-text-muted" />
+            <Timer size={16} strokeWidth={1.75} className="text-text-muted" />
             <h2 className="text-sm font-bold text-text-primary">Decision History</h2>
           </div>
           <button
             onClick={onClose}
             className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-subtle transition-colors cursor-pointer"
           >
-            <X size={16} />
+            <Xmark size={16} />
           </button>
         </div>
 
@@ -53,7 +44,7 @@ export function DecisionHistoryModal({
             <div className="p-3.5 rounded-lg bg-bg-subtle border border-border-color space-y-2">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-text-primary capitalize flex items-center gap-1.5">
-                  <CheckCircle2 size={13} className="text-emerald-500" />
+                  <CheckCircle size={13} className="text-emerald-500" />
                   {decision.action.replace("_", " ")}
                 </span>
                 <span className="text-[11px] text-text-muted flex items-center gap-1">

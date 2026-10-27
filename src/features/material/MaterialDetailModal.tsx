@@ -1,24 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  X, 
-  FileText, 
-  Mic, 
-  Globe, 
-  RefreshCw, 
-  Copy, 
-  Check, 
-  ExternalLink,
-  Download,
-  AlertCircle
-} from "lucide-react";
+import { Xmark, Page, Microphone, Globe, Refresh, Copy, Check, OpenInWindow, Download, WarningCircle } from "iconoir-react";
 import { Material, MaterialExtraction } from "../../types";
 import { getMaterialBlob } from "../../services/blob-store";
 import { subscribeToExtraction } from "../../services/extraction-db";
 import { StructuredTableView } from "../../shared/components/StructuredTableView";
 import { ConfirmDialog } from "../../shared/components/ConfirmDialog";
 import { PdfInlinePreview } from "./PdfInlinePreview";
-import { Table as TableIcon } from "lucide-react";
+import { Table as TableIcon } from "iconoir-react";
 
 interface MaterialDetailModalProps {
   material: Material | null;
@@ -166,7 +155,7 @@ export function MaterialDetailModal({
               className="p-1 -ml-1 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-subtle transition-colors shrink-0 cursor-pointer"
               aria-label="Close"
             >
-              <X size={18} />
+              <Xmark size={18} />
             </button>
             <h2 className="text-sm sm:text-base font-bold text-text-primary truncate">
               {material.title}
@@ -223,7 +212,7 @@ export function MaterialDetailModal({
               {material.type === "audio" && mediaSource && (
                 <div className="flex-1 flex flex-col items-center justify-center p-6 space-y-3">
                   <div className="p-3 rounded-xl bg-bg-subtle border border-border-color text-text-secondary">
-                    <Mic size={24} strokeWidth={1.75} />
+                    <Microphone size={24} strokeWidth={1.75} />
                   </div>
                   <audio controls src={mediaSource} className="w-full max-w-md" />
                 </div>
@@ -253,7 +242,7 @@ export function MaterialDetailModal({
                       className="text-accent-highlight font-mono text-xs sm:text-sm underline flex items-center justify-center gap-1.5 break-all hover:opacity-80"
                     >
                       {material?.originalInput?.url || "No link URL provided"}
-                      <ExternalLink size={13} className="shrink-0" />
+                      <OpenInWindow size={13} className="shrink-0" />
                     </a>
                   </div>
                 </div>
@@ -279,7 +268,7 @@ export function MaterialDetailModal({
               {!isPdf && isDocumentType && mediaSource && !material.originalInput?.rawContent && (
                 <div className="flex-1 flex flex-col items-center justify-center p-8 space-y-3 text-center">
                   <div className="p-3 rounded-xl bg-bg-subtle border border-border-color text-text-primary">
-                    <FileText size={24} strokeWidth={1.75} />
+                    <Page size={24} strokeWidth={1.75} />
                   </div>
                   <div className="space-y-1">
                     <p className="text-sm font-semibold text-text-primary">
@@ -328,7 +317,7 @@ export function MaterialDetailModal({
               {effectiveStatus === "processing" ? (
                 <div className="flex-1 flex flex-col items-center justify-center p-6 text-center space-y-3">
                   <div className="p-2.5 rounded-full bg-bg-subtle border border-border-color text-text-primary">
-                    <RefreshCw size={20} className="animate-spin" />
+                    <Refresh size={20} className="animate-spin" />
                   </div>
                   <p className="text-xs sm:text-sm font-semibold text-text-primary">{processingMessage}</p>
                 </div>
@@ -337,7 +326,7 @@ export function MaterialDetailModal({
                   {effectiveStatus === "partially_completed" && (
                     <div className="flex items-center justify-between p-2.5 rounded-lg bg-bg-subtle border border-border-color text-xs text-text-secondary">
                       <div className="flex items-center gap-1.5">
-                        <AlertCircle size={14} className="text-amber-500 shrink-0" />
+                        <WarningCircle size={14} className="text-amber-500 shrink-0" />
                         <span>{partialMessage}</span>
                       </div>
                       {onReprocess && (
@@ -347,7 +336,7 @@ export function MaterialDetailModal({
                           disabled={isReprocessing}
                           className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border border-border-color bg-bg-surface hover:bg-bg-subtle text-text-primary transition-colors cursor-pointer"
                         >
-                          <RefreshCw size={10} className={isReprocessing ? "animate-spin" : ""} />
+                          <Refresh size={10} className={isReprocessing ? "animate-spin" : ""} />
                           <span>Retry</span>
                         </button>
                       )}

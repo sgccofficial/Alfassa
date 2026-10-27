@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "../../shared/providers/AuthProvider";
 import { Button } from "../../shared/components/Button";
-import { Brain, Loader2, MessageSquare } from "lucide-react";
+import { Brain, Message } from "iconoir-react";
+import { Loading } from "loading-dev";
 
 export function LoginScreen() {
   const { signInWithGoogle, signInAsGuest } = useAuth();
@@ -54,7 +55,7 @@ export function LoginScreen() {
             onClick={handleGoogleSignIn}
             disabled={isLoading}
           >
-            {isLoading ? <Loader2 size={15} className="animate-spin" /> : null}
+            {isLoading ? <Loading size={15}  /> : null}
             Continue with Google
           </Button>
           
@@ -64,7 +65,7 @@ export function LoginScreen() {
             onClick={() => setNotice("ChatGPT provider connection will be enabled in upcoming releases.")}
             disabled={isLoading}
           >
-            <MessageSquare size={15} strokeWidth={1.75} className="opacity-70" />
+            <Message size={15} strokeWidth={1.75} className="opacity-70" />
             Continue with ChatGPT
           </Button>
           
@@ -85,7 +86,7 @@ export function LoginScreen() {
             onClick={handleGuestSignIn}
             disabled={isLoading}
           >
-            {isLoading ? <Loader2 size={15} className="animate-spin" /> : null}
+            {isLoading ? <Loading size={15}  /> : null}
             Continue as Guest
           </Button>
         </div>

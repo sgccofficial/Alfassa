@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { CheckCircle2, AlertCircle, Loader2, X } from "lucide-react";
+import { CheckCircle, WarningCircle, Xmark } from "iconoir-react";
+import { Loading } from "loading-dev";
 
 interface IntakeStatusToastProps {
   isProcessing: boolean;
@@ -31,15 +32,15 @@ export function IntakeStatusToast({
     <div className="fixed bottom-16 md:bottom-6 right-6 z-40 max-w-sm w-full animate-in slide-in-from-bottom-3 duration-200">
       <div className="bg-bg-surface/98 backdrop-blur-md border border-border-color rounded-xl p-3 shadow-md flex items-center gap-2.5">
         {isProcessing && (
-          <Loader2 size={16} className="text-accent-highlight animate-spin shrink-0" />
+          <Loading size={16} className="text-accent-highlight shrink-0" />
         )}
 
         {!isProcessing && statusMessage && (
-          <CheckCircle2 size={16} strokeWidth={2} className="text-emerald-500 shrink-0" />
+          <CheckCircle size={16} strokeWidth={2} className="text-emerald-500 shrink-0" />
         )}
 
         {!isProcessing && errorMessage && (
-          <AlertCircle size={16} strokeWidth={2} className="text-red-500 shrink-0" />
+          <WarningCircle size={16} strokeWidth={2} className="text-red-500 shrink-0" />
         )}
 
         <div className="flex-1 min-w-0">
@@ -57,7 +58,7 @@ export function IntakeStatusToast({
             className="text-text-muted hover:text-text-primary p-1 rounded-md hover:bg-bg-subtle transition-colors cursor-pointer"
             aria-label="Dismiss notification"
           >
-            <X size={14} />
+            <Xmark size={14} />
           </button>
         )}
       </div>

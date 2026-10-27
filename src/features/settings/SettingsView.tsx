@@ -1,5 +1,5 @@
 import React from "react";
-import { Settings, Wrench } from "lucide-react";
+import { Settings, Wrench } from "iconoir-react";
 import { Link } from "react-router-dom";
 
 export function SettingsView() {

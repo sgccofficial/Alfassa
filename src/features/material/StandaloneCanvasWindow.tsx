@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, ExternalLink, Columns2, Loader2, Maximize2, Sparkles, X, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, BookStack, OpenInWindow, ViewColumns2, Expand, Sparks, Xmark, EyeSolid, EyeClosed } from "iconoir-react";
+import { Loading } from "loading-dev";
 import { Material, MaterialExtraction } from "../../types";
 import { useAuth } from "../../shared/providers/AuthProvider";
 import { getMaterialFromDb, subscribeToUserMaterials } from "../../services/material-db";
@@ -58,7 +59,7 @@ export function StandaloneCanvasWindow() {
     return (
       <div className="min-h-screen bg-bg-main flex items-center justify-center p-6">
         <div className="flex flex-col items-center gap-3 text-text-secondary">
-          <Loader2 className="animate-spin" size={24} />
+          <Loading  size={24} />
           <p className="text-xs font-semibold">Opening Infinite Canvas Board...</p>
         </div>
       </div>
@@ -120,7 +121,7 @@ export function StandaloneCanvasWindow() {
             }`}
             title="Toggle Original Source Document Overlay/Drawer"
           >
-            <BookOpen size={14} />
+            <BookStack size={14} />
             <span>{showFileDrawer ? "Hide File" : "Original File"}</span>
           </button>
 
@@ -137,7 +138,7 @@ export function StandaloneCanvasWindow() {
             className="h-8 px-3 rounded-xl text-xs font-semibold bg-bg-surface border border-border-color text-text-secondary hover:text-text-primary hover:bg-bg-subtle transition-colors cursor-pointer inline-flex items-center gap-1.5"
             title="Open Canvas in Separate Window"
           >
-            <ExternalLink size={14} />
+            <OpenInWindow size={14} />
             <span className="hidden sm:inline">Pop Out Window</span>
           </button>
         </div>
@@ -153,7 +154,7 @@ export function StandaloneCanvasWindow() {
           >
             <div className="p-2 border-b border-border-color bg-bg-subtle/80 flex items-center justify-between">
               <span className="text-xs font-bold text-text-primary flex items-center gap-1.5 px-2">
-                <BookOpen size={14} className="text-text-muted" />
+                <BookStack size={14} className="text-text-muted" />
                 <span>Original File View</span>
               </span>
               <button
@@ -162,7 +163,7 @@ export function StandaloneCanvasWindow() {
                 className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-surface cursor-pointer"
                 title="Close Original File Drawer"
               >
-                <X size={14} />
+                <Xmark size={14} />
               </button>
             </div>
 

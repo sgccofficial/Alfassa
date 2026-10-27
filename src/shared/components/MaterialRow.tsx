@@ -1,14 +1,6 @@
 import React from "react";
 import { Material, MaterialType } from "../../types";
-import { 
-  FileText, 
-  Video, 
-  Mic, 
-  Globe, 
-  Image as ImageIcon, 
-  Paperclip,
-  RefreshCw
-} from "lucide-react";
+import { Page, MediaVideo, Microphone, Globe, MediaImage as ImageIcon, Attachment, Refresh } from "iconoir-react";
 import { ProcessingIndicator } from "./ProcessingIndicator";
 
 export function capitalizeMaterialType(type?: string): string {
@@ -53,16 +45,16 @@ export function getMaterialIcon(type?: MaterialType) {
     case "image":
       return <ImageIcon size={18} strokeWidth={1.5} />;
     case "video":
-      return <Video size={18} strokeWidth={1.5} />;
+      return <MediaVideo size={18} strokeWidth={1.5} />;
     case "audio":
-      return <Mic size={18} strokeWidth={1.5} />;
+      return <Microphone size={18} strokeWidth={1.5} />;
     case "link":
       return <Globe size={18} strokeWidth={1.5} />;
     case "document":
     case "text":
-      return <FileText size={18} strokeWidth={1.5} />;
+      return <Page size={18} strokeWidth={1.5} />;
     default:
-      return <Paperclip size={18} strokeWidth={1.5} />;
+      return <Attachment size={18} strokeWidth={1.5} />;
   }
 }
 
@@ -221,7 +213,7 @@ export function MaterialRow({
                 }}
                 className="text-[11px] font-semibold text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 cursor-pointer shrink-0 flex items-center gap-1"
               >
-                <RefreshCw size={11} />
+                <Refresh size={11} />
                 Retry
               </button>
             )}

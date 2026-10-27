@@ -1,65 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  Pencil, 
-  Highlighter, 
-  Eraser, 
-  MousePointer, 
-  Type, 
-  StickyNote, 
-  Square, 
-  Circle, 
-  Minus, 
-  ArrowUpRight, 
-  Grid, 
-  AlignJustify, 
-  CircleDot, 
-  ZoomIn, 
-  ZoomOut, 
-  Undo2, 
-  Redo2, 
-  Trash2, 
-  Download, 
-  Scissors,
-  Lasso,
-  Mic,
-  Square as StopSquare,
-  Play,
-  Pause,
-  BookOpen,
-  ChevronDown,
-  ChevronUp,
-  Sparkles,
-  X,
-  Hand,
-  PenTool,
-  Home,
-  LayoutGrid,
-  SlidersHorizontal,
-  Eye,
-  EyeOff,
-  GripVertical,
-  Plus,
-  Search,
-  Settings,
-  MoreHorizontal,
-  Bookmark,
-  FileText,
-  Ruler,
-  Pointer,
-  Check,
-  ChevronRight,
-  Layers,
-  Copy,
-  Palette,
-  Video,
-  Clock,
-  RotateCcw,
-  Maximize2,
-  Minimize2,
-  Columns2,
-  Layout
-} from "lucide-react";
+import { EditPencil, Erase, CursorPointer, Text, Post, Circle, Minus, ArrowUpRight, ViewGrid, AlignJustify, Search, ZoomIn, ZoomOut, Undo, Redo, Trash, Download, Scissor, SelectiveTool, Microphone, Play, Pause, BookStack, NavArrowDown, NavArrowUp, Sparks, Xmark, DragHandGesture, Home, ControlSlider, EyeSolid, EyeClosed, Drag, Plus, Settings, MoreHoriz, Bookmark, Page, Ruler, Check, NavArrowRight, ViewColumns2, Copy, Palette, MediaVideo, Clock, Expand, Collapse, LayoutLeft, Square } from "iconoir-react";
 import { Material, MaterialExtraction } from "../../types";
 import { 
   CanvasTool, 
@@ -1551,7 +1492,7 @@ export function FlexcilCanvasBoard({
               className="p-1 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
               title="All Pages Overview"
             >
-              <LayoutGrid size={15} />
+              <ViewGrid size={15} />
             </button>
 
             {/* View Mode Switcher Pill (File Reader | Canvas | Split View) */}
@@ -1565,7 +1506,7 @@ export function FlexcilCanvasBoard({
                   }`}
                   title="View Original Source File"
                 >
-                  <BookOpen size={10} />
+                  <BookStack size={10} />
                   <span>File</span>
                 </button>
                 <button
@@ -1576,7 +1517,7 @@ export function FlexcilCanvasBoard({
                   }`}
                   title="View Infinite Canvas Board"
                 >
-                  <Layout size={10} />
+                  <LayoutLeft size={10} />
                   <span>Canvas</span>
                 </button>
                 <button
@@ -1587,7 +1528,7 @@ export function FlexcilCanvasBoard({
                   }`}
                   title="Side-by-Side Split View"
                 >
-                  <Columns2 size={10} />
+                  <ViewColumns2 size={10} />
                   <span>Split</span>
                 </button>
               </div>
@@ -1603,7 +1544,7 @@ export function FlexcilCanvasBoard({
                   title="Switch Canvas File"
                 >
                   <span className="truncate">{material.title}</span>
-                  <ChevronDown size={12} className="shrink-0 text-slate-400" />
+                  <NavArrowDown size={12} className="shrink-0 text-slate-400" />
                 </button>
 
                 {showFileSwitchMenu && (
@@ -1649,8 +1590,8 @@ export function FlexcilCanvasBoard({
                 title="Quick Switch Menu"
               >
                 <div className="flex flex-col -space-y-1">
-                  <ChevronUp size={10} />
-                  <ChevronDown size={10} />
+                  <NavArrowUp size={10} />
+                  <NavArrowDown size={10} />
                 </div>
               </button>
 
@@ -1664,7 +1605,7 @@ export function FlexcilCanvasBoard({
                     }}
                     className="w-full text-left px-2.5 py-1.5 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center gap-2"
                   >
-                    <Scissors size={13} className="text-blue-500" />
+                    <Scissor size={13} className="text-blue-500" />
                     <span>Insert Excerpt</span>
                   </button>
                   <button
@@ -1675,7 +1616,7 @@ export function FlexcilCanvasBoard({
                     }}
                     className="w-full text-left px-2.5 py-1.5 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center gap-2"
                   >
-                    <Video size={13} className="text-purple-500" />
+                    <MediaVideo size={13} className="text-purple-500" />
                     <span>Video Player Embed</span>
                   </button>
                   <button
@@ -1707,7 +1648,7 @@ export function FlexcilCanvasBoard({
                     onClick={() => { setPaperStyle("grid"); setShowQuickSwitchMenu(false); }}
                     className={`w-full text-left px-2.5 py-1 flex items-center gap-2 ${paperStyle === "grid" ? "font-bold text-blue-600" : "text-slate-600 dark:text-slate-300"}`}
                   >
-                    <Grid size={12} />
+                    <ViewGrid size={12} />
                     <span>Grid Pattern</span>
                   </button>
                   <button
@@ -1723,7 +1664,7 @@ export function FlexcilCanvasBoard({
                     onClick={() => { setPaperStyle("dots"); setShowQuickSwitchMenu(false); }}
                     className={`w-full text-left px-2.5 py-1 flex items-center gap-2 ${paperStyle === "dots" ? "font-bold text-blue-600" : "text-slate-600 dark:text-slate-300"}`}
                   >
-                    <CircleDot size={12} />
+                    <Search size={12} />
                     <span>Dot Pattern</span>
                   </button>
                 </div>
@@ -1740,7 +1681,7 @@ export function FlexcilCanvasBoard({
               className="p-1 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-30 transition-colors cursor-pointer"
               title="Undo"
             >
-              <Undo2 size={15} />
+              <Undo size={15} />
             </button>
             <button
               type="button"
@@ -1749,7 +1690,7 @@ export function FlexcilCanvasBoard({
               className="p-1 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-30 transition-colors cursor-pointer"
               title="Redo"
             >
-              <Redo2 size={15} />
+              <Redo size={15} />
             </button>
 
             <div className="w-px h-3.5 bg-slate-200 dark:bg-slate-700 mx-0.5" />
@@ -1765,7 +1706,7 @@ export function FlexcilCanvasBoard({
               }`}
               title={inputMode === "pen" ? "Pen Mode Active (Touch pans canvas)" : "Finger Mode Active (Touch draws)"}
             >
-              {inputMode === "pen" ? <PenTool size={12} /> : <Hand size={12} />}
+              {inputMode === "pen" ? <EditPencil size={12} /> : <DragHandGesture size={12} />}
               <span className="text-[10px] font-mono uppercase">{inputMode}</span>
             </button>
           </div>
@@ -1778,7 +1719,7 @@ export function FlexcilCanvasBoard({
             className="p-1 rounded-full text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
             title="Pen Edit Active"
           >
-            <Pencil size={15} />
+            <EditPencil size={15} />
           </button>
 
           <button
@@ -1786,7 +1727,7 @@ export function FlexcilCanvasBoard({
             className="p-1 rounded-full text-blue-600 dark:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
             title="AI Sparkles"
           >
-            <Sparkles size={15} />
+            <Sparks size={15} />
           </button>
 
           {onToggleDocumentDrawer && (
@@ -1796,7 +1737,7 @@ export function FlexcilCanvasBoard({
               className="p-1 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
               title="Toggle Original Document Drawer"
             >
-              <BookOpen size={15} />
+              <BookStack size={15} />
             </button>
           )}
 
@@ -1807,7 +1748,7 @@ export function FlexcilCanvasBoard({
               className="p-1 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
               title="More Options"
             >
-              <MoreHorizontal size={15} />
+              <MoreHoriz size={15} />
             </button>
 
             {showMoreOptionsMenu && (
@@ -1817,7 +1758,7 @@ export function FlexcilCanvasBoard({
                   onClick={() => { setShowOutlineDrawer(true); setShowMoreOptionsMenu(false); }}
                   className="w-full text-left px-2.5 py-1.5 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center gap-2"
                 >
-                  <FileText size={13} />
+                  <Page size={13} />
                   <span>Document Outline</span>
                 </button>
                 <button
@@ -1833,7 +1774,7 @@ export function FlexcilCanvasBoard({
                   onClick={() => { setShowCustomizeModal(true); setShowMoreOptionsMenu(false); }}
                   className="w-full text-left px-2.5 py-1.5 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center gap-2"
                 >
-                  <SlidersHorizontal size={13} />
+                  <ControlSlider size={13} />
                   <span>Customize Dock Tools</span>
                 </button>
               </div>
@@ -1867,7 +1808,7 @@ export function FlexcilCanvasBoard({
               onClick={() => setShowRuler(false)}
               className="p-1 rounded hover:bg-amber-200 text-amber-900 dark:text-amber-200"
             >
-              <X size={14} />
+              <Xmark size={14} />
             </button>
           </div>
         )}
@@ -1889,7 +1830,7 @@ export function FlexcilCanvasBoard({
               className="px-2 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1 cursor-grab active:cursor-grabbing"
               title="Drag Selection Group"
             >
-              <GripVertical size={13} />
+              <Drag size={13} />
               <span>Move</span>
             </button>
 
@@ -1939,7 +1880,7 @@ export function FlexcilCanvasBoard({
               className="p-1.5 rounded-lg hover:bg-rose-900/60 text-rose-400 hover:text-rose-200 transition-colors cursor-pointer"
               title="Delete Selection"
             >
-              <Trash2 size={14} />
+              <Trash size={14} />
             </button>
 
             <div className="w-px h-4 bg-slate-700 mx-0.5" />
@@ -1953,7 +1894,7 @@ export function FlexcilCanvasBoard({
               className="p-1 rounded text-slate-400 hover:text-white"
               title="Deselect"
             >
-              <X size={13} />
+              <Xmark size={13} />
             </button>
           </div>
         )}
@@ -1995,8 +1936,8 @@ export function FlexcilCanvasBoard({
                     className="px-3 py-2 border-b border-white/10 flex items-center justify-between cursor-grab active:cursor-grabbing bg-black/20"
                   >
                     <div className="flex items-center gap-2 truncate">
-                      <GripVertical size={14} className="opacity-60" />
-                      <Video size={14} className="text-purple-400 shrink-0" />
+                      <Drag size={14} className="opacity-60" />
+                      <MediaVideo size={14} className="text-purple-400 shrink-0" />
                       <span className="text-xs font-bold truncate">{note.title || "Video Study Player"}</span>
                     </div>
 
@@ -2027,7 +1968,7 @@ export function FlexcilCanvasBoard({
                         className="p-1 rounded hover:bg-rose-500/20 text-rose-400 transition-colors cursor-pointer"
                         title="Remove Video"
                       >
-                        <X size={12} />
+                        <Xmark size={12} />
                       </button>
                     </div>
                   </div>
@@ -2092,7 +2033,7 @@ export function FlexcilCanvasBoard({
                     className="px-3 py-2 border-b border-white/10 flex items-center justify-between cursor-grab active:cursor-grabbing bg-black/20"
                   >
                     <div className="flex items-center gap-2 truncate">
-                      <GripVertical size={14} className="opacity-60" />
+                      <Drag size={14} className="opacity-60" />
                       <Clock size={14} className="text-amber-400 shrink-0" />
                       <span className="text-xs font-bold truncate">{note.title || "Pomodoro Clock"}</span>
                     </div>
@@ -2123,7 +2064,7 @@ export function FlexcilCanvasBoard({
                         className="p-1 rounded hover:bg-rose-500/20 text-rose-400 transition-colors cursor-pointer"
                         title="Remove Clock"
                       >
-                        <X size={12} />
+                        <Xmark size={12} />
                       </button>
                     </div>
                   </div>
@@ -2210,7 +2151,7 @@ export function FlexcilCanvasBoard({
                             className="p-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs transition-colors"
                             title="Reset Timer"
                           >
-                            <RotateCcw size={12} />
+                            <Undo size={12} />
                           </button>
                         </div>
                       </>
@@ -2264,12 +2205,12 @@ export function FlexcilCanvasBoard({
                   className="flex items-center justify-between gap-2 border-b border-black/10 dark:border-white/10 pb-1.5 cursor-grab active:cursor-grabbing"
                 >
                   <div className="flex items-center gap-1.5 truncate">
-                    <GripVertical size={13} className="opacity-40" />
+                    <Drag size={13} className="opacity-40" />
                     <span className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70 truncate flex items-center gap-1">
-                      {note.type === "sticky" && <StickyNote size={12} />}
-                      {note.type === "clip" && <Scissors size={12} className="text-blue-500" />}
-                      {note.type === "text" && <Type size={12} />}
-                      {note.type === "audio" && <Mic size={12} className="text-rose-600" />}
+                      {note.type === "sticky" && <Post size={12} />}
+                      {note.type === "clip" && <Scissor size={12} className="text-blue-500" />}
+                      {note.type === "text" && <Text size={12} />}
+                      {note.type === "audio" && <Microphone size={12} className="text-rose-600" />}
                       {note.title || (note.type === "audio" ? "Voice Stamp" : "Sticky Note")}
                     </span>
                   </div>
@@ -2301,7 +2242,7 @@ export function FlexcilCanvasBoard({
                       className="p-1 rounded text-black/40 hover:text-red-600 transition-colors cursor-pointer"
                       title="Delete Note"
                     >
-                      <X size={12} />
+                      <Xmark size={12} />
                     </button>
                   </div>
                 </div>
@@ -2453,7 +2394,7 @@ export function FlexcilCanvasBoard({
             }`}
             title="Pan / Select"
           >
-            <MousePointer size={14} />
+            <CursorPointer size={14} />
           </button>
 
           {/* Standard Pen */}
@@ -2467,7 +2408,7 @@ export function FlexcilCanvasBoard({
             }`}
             title="Standard Round Pen"
           >
-            <Pencil size={14} />
+            <EditPencil size={14} />
           </button>
 
           {/* Fountain / Calligraphy Pen */}
@@ -2481,7 +2422,7 @@ export function FlexcilCanvasBoard({
             }`}
             title="Fountain / Calligraphy Ribbon Pen"
           >
-            <Sparkles size={14} />
+            <Sparks size={14} />
           </button>
 
           {/* Highlighter */}
@@ -2495,7 +2436,7 @@ export function FlexcilCanvasBoard({
             }`}
             title="Highlighter"
           >
-            <Highlighter size={14} />
+            <EditPencil size={14} />
           </button>
 
           {/* Eraser */}
@@ -2509,7 +2450,7 @@ export function FlexcilCanvasBoard({
             }`}
             title="Stroke Eraser"
           >
-            <Eraser size={14} />
+            <Erase size={14} />
           </button>
 
           {/* Masking Tape */}
@@ -2551,7 +2492,7 @@ export function FlexcilCanvasBoard({
             }`}
             title="Lasso Selection"
           >
-            <Lasso size={14} />
+            <SelectiveTool size={14} />
           </button>
 
           {/* Text / Sticky Note Tool */}
@@ -2565,7 +2506,7 @@ export function FlexcilCanvasBoard({
             }`}
             title="Text & Sticky Note Card"
           >
-            <StickyNote size={14} />
+            <Post size={14} />
           </button>
 
           {/* Video Embed Tool Button */}
@@ -2575,7 +2516,7 @@ export function FlexcilCanvasBoard({
             className="p-1.5 rounded-lg text-xs font-semibold text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/40 transition-colors cursor-pointer"
             title="Embed Video Player"
           >
-            <Video size={14} />
+            <MediaVideo size={14} />
           </button>
 
           {/* Clock / Focus Timer Embed Tool Button */}
@@ -2610,7 +2551,7 @@ export function FlexcilCanvasBoard({
               className="p-1.5 rounded-lg text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
               title="Record Voice Stamp"
             >
-              <Mic size={14} />
+              <Microphone size={14} />
             </button>
           ) : (
             <button
@@ -2619,7 +2560,7 @@ export function FlexcilCanvasBoard({
               className="p-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white animate-pulse transition-all cursor-pointer flex items-center gap-1"
               title="Stop Recording"
             >
-              <StopSquare size={13} />
+              <Square size={13} />
               <span className="font-mono text-[9px]">{recordingTime}s</span>
             </button>
           )}
@@ -2635,7 +2576,7 @@ export function FlexcilCanvasBoard({
             }`}
             title="Temporary Fading Laser Pointer"
           >
-            <Pointer size={14} />
+            <CursorPointer size={14} />
           </button>
 
           <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-0.5" />
@@ -2647,7 +2588,7 @@ export function FlexcilCanvasBoard({
             className="p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
             title="Customize Dock Tools"
           >
-            <SlidersHorizontal size={14} />
+            <ControlSlider size={14} />
           </button>
 
           {/* Collapse Dock Arrow Toggle */}
@@ -2657,7 +2598,7 @@ export function FlexcilCanvasBoard({
             className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
             title={isDockCollapsed ? "Expand Toolbar" : "Collapse Toolbar"}
           >
-            {isDockCollapsed ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            {isDockCollapsed ? <NavArrowUp size={14} /> : <NavArrowDown size={14} />}
           </button>
         </div>
       </div>
@@ -2668,7 +2609,7 @@ export function FlexcilCanvasBoard({
           <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl w-full max-w-3xl max-h-[85vh] p-6 shadow-2xl flex flex-col gap-4">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                <LayoutGrid size={20} className="text-blue-500" />
+                <ViewGrid size={20} className="text-blue-500" />
                 <span>All Pages Overview</span>
               </h2>
               <button
@@ -2676,7 +2617,7 @@ export function FlexcilCanvasBoard({
                 onClick={() => setShowAllPagesModal(false)}
                 className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
               >
-                <X size={20} />
+                <Xmark size={20} />
               </button>
             </div>
 
@@ -2696,7 +2637,7 @@ export function FlexcilCanvasBoard({
                   }`}
                 >
                   <div className="w-full h-32 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 p-2 relative overflow-hidden flex items-center justify-center">
-                    <Grid size={24} className="text-slate-200 dark:text-slate-800" />
+                    <ViewGrid size={24} className="text-slate-200 dark:text-slate-800" />
                     <span className="absolute bottom-2 right-2 text-[10px] font-mono font-bold bg-slate-900 text-white px-1.5 py-0.5 rounded">
                       P.{p.id}
                     </span>
@@ -2742,7 +2683,7 @@ export function FlexcilCanvasBoard({
           <div className="bg-white dark:bg-slate-800 border-t sm:border border-slate-200 dark:border-slate-700 rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[80vh] p-6 shadow-2xl flex flex-col gap-4">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                <SlidersHorizontal size={18} className="text-blue-500" />
+                <ControlSlider size={18} className="text-blue-500" />
                 <span>Reorder Tools & Visibility</span>
               </h2>
               <button
@@ -2750,7 +2691,7 @@ export function FlexcilCanvasBoard({
                 onClick={() => setShowCustomizeModal(false)}
                 className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
               >
-                <X size={18} />
+                <Xmark size={18} />
               </button>
             </div>
 
@@ -2761,7 +2702,7 @@ export function FlexcilCanvasBoard({
                   className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700/60"
                 >
                   <div className="flex items-center gap-3">
-                    <GripVertical size={16} className="text-slate-400 cursor-grab" />
+                    <Drag size={16} className="text-slate-400 cursor-grab" />
                     <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">{tool.label}</span>
                   </div>
 
@@ -2776,7 +2717,7 @@ export function FlexcilCanvasBoard({
                       tool.isVisible ? "text-blue-600 bg-blue-50 dark:bg-blue-950/40" : "text-slate-400 hover:text-slate-600"
                     }`}
                   >
-                    {tool.isVisible ? <Eye size={16} /> : <EyeOff size={16} />}
+                    {tool.isVisible ? <EyeSolid size={16} /> : <EyeClosed size={16} />}
                   </button>
                 </div>
               ))}
@@ -2799,7 +2740,7 @@ export function FlexcilCanvasBoard({
           <div className="w-full max-w-sm bg-white dark:bg-slate-800 h-full border-l border-slate-200 dark:border-slate-700 shadow-2xl p-5 flex flex-col gap-4">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                <FileText size={18} className="text-blue-500" />
+                <Page size={18} className="text-blue-500" />
                 <span>Document Outline</span>
               </h2>
               <button
@@ -2807,7 +2748,7 @@ export function FlexcilCanvasBoard({
                 onClick={() => setShowOutlineDrawer(false)}
                 className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
               >
-                <X size={18} />
+                <Xmark size={18} />
               </button>
             </div>
 
@@ -2846,7 +2787,7 @@ export function FlexcilCanvasBoard({
           <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl w-full max-w-md p-5 shadow-2xl space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
-                <Scissors size={16} className="text-blue-500" />
+                <Scissor size={16} className="text-blue-500" />
                 <span>Clip Excerpt to Canvas Board</span>
               </h3>
               <button
@@ -2854,7 +2795,7 @@ export function FlexcilCanvasBoard({
                 onClick={() => setShowClipModal(false)}
                 className="p-1 rounded-md text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
               >
-                <X size={16} />
+                <Xmark size={16} />
               </button>
             </div>
 

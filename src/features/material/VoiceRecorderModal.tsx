@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Mic, Square, Play, Pause, RotateCcw, ArrowRight, AlertCircle } from "lucide-react";
+import { Microphone, Square, Play, Pause, Undo, ArrowRight, WarningCircle } from "iconoir-react";
 import { Modal } from "../../shared/components/Modal";
 
 interface VoiceRecorderModalProps {
@@ -150,7 +150,7 @@ export function VoiceRecorderModal({ isOpen, onClose, onSave }: VoiceRecorderMod
               : "bg-bg-subtle text-text-muted border border-border-color"
           }`}
         >
-          <Mic size={32} strokeWidth={1.75} />
+          <Microphone size={32} strokeWidth={1.75} />
         </div>
 
         <div className="text-2xl font-mono font-semibold text-text-primary tracking-wider mb-1">
@@ -164,7 +164,7 @@ export function VoiceRecorderModal({ isOpen, onClose, onSave }: VoiceRecorderMod
 
       {error && (
         <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-xs text-red-500 mb-4 text-left">
-          <AlertCircle size={15} className="shrink-0" />
+          <WarningCircle size={15} className="shrink-0" />
           <span>{error}</span>
         </div>
       )}
@@ -176,7 +176,7 @@ export function VoiceRecorderModal({ isOpen, onClose, onSave }: VoiceRecorderMod
             onClick={startRecording}
             className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-xs font-semibold bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 transition-all shadow-xs active:scale-98 cursor-pointer"
           >
-            <Mic size={15} strokeWidth={1.75} />
+            <Microphone size={15} strokeWidth={1.75} />
             <span>Start Recording</span>
           </button>
         )}
@@ -217,7 +217,7 @@ export function VoiceRecorderModal({ isOpen, onClose, onSave }: VoiceRecorderMod
                 title="Record again"
                 aria-label="Record again"
               >
-                <RotateCcw size={18} />
+                <Undo size={18} />
               </button>
             </div>
 

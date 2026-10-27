@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  FileText, 
-  Image as ImageIcon, 
-  Video, 
-  Mic, 
-  Globe, 
-  Paperclip, 
-  ArrowUpRight,
-  ChevronDown,
-  ChevronUp,
-  Info
-} from "lucide-react";
+import { Page, MediaImage as ImageIcon, MediaVideo, Microphone, Globe, Attachment, ArrowUpRight, NavArrowDown, NavArrowUp, InfoCircle } from "iconoir-react";
 import { Material, MaterialType, MaterialExtraction } from "../../../types";
 
 interface ConceptSourcesListProps {
@@ -29,17 +18,17 @@ export function ConceptSourcesList({
   const getSourceIcon = (type?: MaterialType) => {
     switch (type) {
       case "document":
-        return <FileText size={16} strokeWidth={1.75} />;
+        return <Page size={16} strokeWidth={1.75} />;
       case "image":
         return <ImageIcon size={16} strokeWidth={1.75} />;
       case "video":
-        return <Video size={16} strokeWidth={1.75} />;
+        return <MediaVideo size={16} strokeWidth={1.75} />;
       case "audio":
-        return <Mic size={16} strokeWidth={1.75} />;
+        return <Microphone size={16} strokeWidth={1.75} />;
       case "link":
         return <Globe size={16} strokeWidth={1.75} />;
       default:
-        return <Paperclip size={16} strokeWidth={1.75} />;
+        return <Attachment size={16} strokeWidth={1.75} />;
     }
   };
 
@@ -80,7 +69,7 @@ export function ConceptSourcesList({
     <div id="concept-sources-card" className="p-4 sm:p-5 rounded-xl bg-bg-surface border border-border-color shadow-2xs space-y-3.5">
       <div className="flex items-center justify-between border-b border-border-color pb-2.5">
         <div className="flex items-center gap-2">
-          <Paperclip size={15} strokeWidth={1.75} className="text-text-muted" />
+          <Attachment size={15} strokeWidth={1.75} className="text-text-muted" />
           <h2 className="text-xs font-bold text-text-primary uppercase tracking-wider">
             Source Materials
           </h2>
@@ -132,7 +121,7 @@ export function ConceptSourcesList({
                       title={isExpanded ? "Hide provenance details" : "Show provenance details"}
                       aria-label="Toggle provenance details"
                     >
-                      {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                      {isExpanded ? <NavArrowUp size={14} /> : <NavArrowDown size={14} />}
                     </button>
                     <button
                       type="button"
@@ -150,7 +139,7 @@ export function ConceptSourcesList({
                 {isExpanded && (
                   <div className="mt-2.5 pt-2.5 border-t border-border-color/60 text-[11px] text-text-secondary space-y-1.5 animate-in fade-in duration-150">
                     <div className="flex items-center gap-1.5 text-text-muted font-medium">
-                      <Info size={12} />
+                      <InfoCircle size={12} />
                       <span>Provenance Traceability</span>
                     </div>
                     <div className="grid grid-cols-2 gap-2 bg-bg-surface p-2 rounded-md border border-border-color/60 text-[10px]">

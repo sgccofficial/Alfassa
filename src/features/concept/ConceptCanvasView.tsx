@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { 
-  ArrowLeft, 
-  History, 
-  Edit3, 
-  Save, 
-  X, 
-  Loader2, 
-  Clock, 
-  BookOpen, 
-  Check,
-  Calendar,
-  AlertCircle
-} from "lucide-react";
+import { ArrowLeft, Timer, Edit, FloppyDisk, Xmark, Clock, BookStack, Check, Calendar, WarningCircle } from "iconoir-react";
+import { Loading } from "loading-dev";
 import { useAuth } from "../../shared/providers/AuthProvider";
 import { 
   Concept, 
@@ -237,7 +226,7 @@ export function ConceptCanvasView() {
     return (
       <div id="concept-canvas-loading" className="min-h-screen bg-bg-main flex items-center justify-center p-6">
         <div className="flex flex-col items-center gap-3 text-text-secondary">
-          <Loader2 className="animate-spin text-text-muted" size={24} />
+          <Loading className="text-text-muted" size={24} />
           <p className="text-xs font-medium">Opening Knowledge Concept...</p>
         </div>
       </div>
@@ -248,7 +237,7 @@ export function ConceptCanvasView() {
     return (
       <div id="concept-canvas-not-found" className="min-h-screen bg-bg-main flex flex-col items-center justify-center p-6 text-center">
         <div className="p-3 rounded-full bg-bg-subtle text-text-muted mb-3">
-          <AlertCircle size={24} />
+          <WarningCircle size={24} />
         </div>
         <h2 className="text-base font-bold text-text-primary mb-1">Concept not found</h2>
         <p className="text-xs text-text-muted max-w-sm mb-4">
@@ -283,7 +272,7 @@ export function ConceptCanvasView() {
           <div className="min-w-0 flex-1 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
             <div className="flex items-center gap-2 min-w-0">
               <span className="p-1.5 rounded-md bg-bg-subtle border border-border-color text-text-secondary shrink-0">
-                <BookOpen size={14} strokeWidth={1.75} />
+                <BookStack size={14} strokeWidth={1.75} />
               </span>
               <h1 className="text-sm sm:text-base font-bold text-text-primary truncate">
                 {isEditing ? editTitle : concept.title}
@@ -299,7 +288,7 @@ export function ConceptCanvasView() {
                 title="View version audit history"
               >
                 <span>Version {concept.currentVersion}</span>
-                <History size={11} className="text-text-muted" />
+                <Timer size={11} className="text-text-muted" />
               </button>
 
               <span>•</span>
@@ -322,7 +311,7 @@ export function ConceptCanvasView() {
             onClick={() => setIsVersionModalOpen(true)}
             className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-text-secondary hover:text-text-primary hover:bg-bg-subtle border border-border-color transition-colors cursor-pointer"
           >
-            <History size={14} strokeWidth={1.75} />
+            <Timer size={14} strokeWidth={1.75} />
             <span>History ({versions.length || 1})</span>
           </button>
 
@@ -344,12 +333,12 @@ export function ConceptCanvasView() {
               >
                 {isSaving ? (
                   <>
-                    <Loader2 size={13} className="animate-spin" />
+                    <Loading size={13}  />
                     <span>Saving...</span>
                   </>
                 ) : (
                   <>
-                    <Save size={13} strokeWidth={2} />
+                    <FloppyDisk size={13} strokeWidth={2} />
                     <span>Save Changes</span>
                   </>
                 )}
@@ -361,7 +350,7 @@ export function ConceptCanvasView() {
               onClick={() => setIsEditing(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-bg-surface hover:bg-bg-subtle text-text-primary border border-border-color transition-colors cursor-pointer"
             >
-              <Edit3 size={13} strokeWidth={1.75} />
+              <Edit size={13} strokeWidth={1.75} />
               <span>Edit Concept</span>
             </button>
           )}

@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import { X } from "lucide-react";
+import { Xmark } from "iconoir-react";
 import { cn } from "../utils/cn";
 
 export interface ModalProps {
@@ -88,7 +88,7 @@ export function Modal({
               className="absolute top-5 right-5 p-1.5 rounded-lg text-text-secondary hover:text-text-primary hover:bg-bg-subtle transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent-highlight cursor-pointer"
               aria-label="Close dialog"
             >
-              <X size={18} strokeWidth={1.75} />
+              <Xmark size={18} strokeWidth={1.75} />
             </button>
           )}
 

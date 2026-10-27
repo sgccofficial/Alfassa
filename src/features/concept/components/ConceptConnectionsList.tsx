@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Material, Concept, MaterialExtraction, KnowledgeRelationship, KnowledgeRelationType } from "../../../types";
-import { Link2, Sparkles, FileText, ArrowUpRight, Check, X, BookOpen, ExternalLink, ShieldCheck } from "lucide-react";
+import { Link, Sparks, Page, ArrowUpRight, Check, Xmark, BookStack, OpenInWindow, ShieldCheck } from "iconoir-react";
 import { ConfirmDialog } from "../../../shared/components/ConfirmDialog";
 
 export interface ProposedConnectionCandidate {
@@ -189,7 +189,7 @@ export function ConceptConnectionsList({
       {/* Section Header */}
       <div className="flex items-center justify-between border-b border-border-color pb-3">
         <div className="flex items-center gap-2">
-          <Link2 size={16} className="text-text-primary" />
+          <Link size={16} className="text-text-primary" />
           <h3 className="text-xs font-bold text-text-primary uppercase tracking-wider">
             Connections
           </h3>
@@ -206,7 +206,7 @@ export function ConceptConnectionsList({
       {/* Candidates List or Restrained Empty State */}
       {candidates.length === 0 ? (
         <div className="p-4 rounded-xl bg-bg-subtle/50 border border-border-color/60 text-center space-y-1">
-          <Sparkles size={16} className="mx-auto text-text-muted" />
+          <Sparks size={16} className="mx-auto text-text-muted" />
           <p className="text-xs font-medium text-text-primary">No new connection candidates</p>
           <p className="text-[11px] text-text-muted">
             All evidence-grounded material and concept links are established or reviewed.
@@ -223,7 +223,7 @@ export function ConceptConnectionsList({
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2 min-w-0">
                   <div className="p-1.5 rounded-md bg-bg-surface border border-border-color shrink-0 text-text-primary">
-                    {cand.targetType === "concept" ? <BookOpen size={14} /> : <FileText size={14} />}
+                    {cand.targetType === "concept" ? <BookStack size={14} /> : <Page size={14} />}
                   </div>
                   <div className="min-w-0">
                     <button
@@ -281,7 +281,7 @@ export function ConceptConnectionsList({
                   className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-medium text-text-muted hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors cursor-pointer"
                   title="Dismiss Candidate"
                 >
-                  <X size={12} />
+                  <Xmark size={12} />
                   <span>Dismiss</span>
                 </button>
                 <button

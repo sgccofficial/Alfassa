@@ -1,14 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { 
-  FileText, 
-  Loader2, 
-  ZoomIn, 
-  ZoomOut, 
-  Maximize2, 
-  RefreshCw, 
-  AlertCircle, 
-  Download
-} from "lucide-react";
+import { Page, ZoomIn, ZoomOut, Expand, Refresh, WarningCircle, Download } from "iconoir-react";
+import { Loading } from "loading-dev";
 import { Material } from "../../types";
 import { 
   loadOriginalMaterial, 
@@ -314,7 +306,7 @@ export function OriginalPdfViewer({
                 title="Fit Width"
                 aria-label="Fit Width"
               >
-                <Maximize2 size={12} />
+                <Expand size={12} />
               </button>
             </div>
           )}
@@ -329,7 +321,7 @@ export function OriginalPdfViewer({
         {/* State 1: Loading (Strictly bounded, never infinite) */}
         {status === "loading" && (
           <div className="flex-1 flex flex-col items-center justify-center p-12 gap-3 text-center min-h-[420px]">
-            <Loader2 size={24} className="animate-spin text-text-secondary" />
+            <Loading size={24} className="text-text-secondary" />
             <p className="text-xs text-text-secondary font-medium">
               Loading original PDF document…
             </p>
@@ -340,7 +332,7 @@ export function OriginalPdfViewer({
         {status === "error" && (
           <div className="flex-1 flex flex-col items-center justify-center p-8 gap-3 text-center min-h-[420px] max-w-md mx-auto">
             <div className="p-2.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
-              <AlertCircle size={24} />
+              <WarningCircle size={24} />
             </div>
             <div className="space-y-1">
               <h4 className="text-sm font-semibold text-text-primary">
@@ -353,7 +345,7 @@ export function OriginalPdfViewer({
                 onClick={handleRetry}
                 className="h-8 px-3.5 rounded-lg text-xs font-semibold bg-bg-surface border border-border-color text-text-primary hover:bg-bg-subtle transition-colors cursor-pointer inline-flex items-center gap-1.5"
               >
-                <RefreshCw size={13} />
+                <Refresh size={13} />
                 <span>Retry</span>
               </button>
               {resolvedBlobUrl && (
@@ -520,7 +512,7 @@ function PdfCanvasPage({
         />
         {!rendered && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/70">
-            <Loader2 size={16} className="animate-spin text-slate-400" />
+            <Loading size={16} className="text-slate-400" />
           </div>
         )}
       </div>

@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import { 
-  BookOpen, 
-  AlertTriangle, 
-  FileText,
-  Layers,
-  ArrowUpDown,
-  Tag
-} from "lucide-react";
+import { BookStack, WarningTriangle, Page, ViewColumns2, TextArrowsUpDown, Hashtag } from "iconoir-react";
 import { CandidateConcept } from "../../../types";
 
 interface ExistingKnowledgePaneProps {
@@ -32,7 +25,7 @@ export function ExistingKnowledgePane({
         className="bg-bg-surface border border-border-color rounded-xl p-4 sm:p-5 space-y-2 shadow-2xs"
       >
         <div className="flex items-center gap-2">
-          <BookOpen size={16} strokeWidth={1.75} className="text-text-muted" />
+          <BookStack size={16} strokeWidth={1.75} className="text-text-muted" />
           <h3 className="text-sm font-bold text-text-primary">Existing Knowledge</h3>
         </div>
         <p className="text-xs text-text-muted">No related knowledge found.</p>
@@ -56,7 +49,7 @@ export function ExistingKnowledgePane({
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="flex items-center gap-2.5">
           <div className="p-1.5 rounded-lg bg-bg-subtle border border-border-color text-text-muted">
-            <BookOpen size={16} strokeWidth={1.75} />
+            <BookStack size={16} strokeWidth={1.75} />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -144,7 +137,7 @@ export function ExistingKnowledgePane({
 
                 {candidate.hasConflict && (
                   <div className="mt-1.5 flex items-center gap-1 text-[10px] text-amber-600 dark:text-amber-400 font-semibold">
-                    <AlertTriangle size={11} />
+                    <WarningTriangle size={11} />
                     Potential difference
                   </div>
                 )}
@@ -157,7 +150,7 @@ export function ExistingKnowledgePane({
       {/* Potential Divergence Notice */}
       {activeCandidate.hasConflict && (
         <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-start gap-2.5 text-xs text-amber-800 dark:text-amber-200">
-          <AlertTriangle size={15} className="text-amber-500 shrink-0 mt-0.5" />
+          <WarningTriangle size={15} className="text-amber-500 shrink-0 mt-0.5" />
           <div className="space-y-0.5">
             <span className="font-semibold block text-xs">Potential difference noted</span>
             <p className="text-[11px] leading-relaxed text-amber-700 dark:text-amber-300">
@@ -182,7 +175,7 @@ export function ExistingKnowledgePane({
             {activeCandidate.overlappingTerms && activeCandidate.overlappingTerms.length > 0 && (
               <div className="flex items-center gap-1.5 flex-wrap pt-1 border-t border-border-color/60">
                 <span className="text-[10px] text-text-muted font-medium flex items-center gap-1">
-                  <Tag size={10} /> Shared topics:
+                  <Hashtag size={10} /> Shared topics:
                 </span>
                 {activeCandidate.overlappingTerms.map((term) => (
                   <span
@@ -202,7 +195,7 @@ export function ExistingKnowledgePane({
             <div className="p-3 rounded-lg bg-bg-subtle/70 border border-border-color space-y-1.5">
               <div className="flex items-center justify-between text-xs pb-1 border-b border-border-color">
                 <span className="font-bold text-text-primary flex items-center gap-1.5">
-                  <FileText size={13} className="text-text-muted" />
+                  <Page size={13} className="text-text-muted" />
                   New Material (Related Excerpt)
                 </span>
                 <span className="text-[10px] uppercase font-semibold text-text-muted tracking-wider">
@@ -217,7 +210,7 @@ export function ExistingKnowledgePane({
             {/* Vertical Flow Divider */}
             <div className="flex items-center justify-center -my-1 text-text-muted">
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-bg-surface border border-border-color text-[10px] font-semibold text-text-muted">
-                <ArrowUpDown size={11} />
+                <TextArrowsUpDown size={11} />
                 <span>Overlaps with</span>
               </div>
             </div>
@@ -226,7 +219,7 @@ export function ExistingKnowledgePane({
             <div className="p-3 rounded-lg bg-bg-subtle/70 border border-border-color space-y-1.5">
               <div className="flex items-center justify-between text-xs pb-1 border-b border-border-color">
                 <span className="font-bold text-text-primary flex items-center gap-1.5">
-                  <BookOpen size={13} className="text-text-muted" />
+                  <BookStack size={13} className="text-text-muted" />
                   Existing Concept: {activeCandidate.conceptTitle}
                 </span>
                 <span className="text-[10px] font-mono text-text-muted font-semibold">
@@ -244,7 +237,7 @@ export function ExistingKnowledgePane({
             {/* Vertical Flow Divider */}
             <div className="flex items-center justify-center -my-1 text-text-muted">
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-bg-surface border border-border-color text-[10px] font-semibold text-text-muted">
-                <ArrowUpDown size={11} />
+                <TextArrowsUpDown size={11} />
                 <span>Associated with</span>
               </div>
             </div>
@@ -253,7 +246,7 @@ export function ExistingKnowledgePane({
             <div className="p-3 rounded-lg bg-bg-subtle/70 border border-border-color space-y-2">
               <div className="flex items-center justify-between text-xs pb-1 border-b border-border-color">
                 <span className="font-bold text-text-primary flex items-center gap-1.5">
-                  <Layers size={13} className="text-text-muted" />
+                  <ViewColumns2 size={13} className="text-text-muted" />
                   Existing Source Materials ({activeCandidate.sourceMaterials?.length || 0})
                 </span>
                 <span className="text-[10px] text-text-muted">

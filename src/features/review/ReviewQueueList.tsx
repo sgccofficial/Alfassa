@@ -1,25 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  CheckCircle2, 
-  Clock, 
-  ArrowRight, 
-  FileText,
-  BookOpen,
-  Globe,
-  Mic,
-  Video,
-  Image as ImageIcon
-} from "lucide-react";
+import { CheckCircle, Clock, ArrowRight, Page, BookStack, Globe, Microphone, MediaVideo, MediaImage as ImageIcon } from "iconoir-react";
 import { Material, WorkspaceReview } from "../../types";
 import { ProcessingIndicator } from "../../shared/components/ProcessingIndicator";
 
 function getMaterialIcon(type?: string) {
   switch (type) {
     case "audio":
-      return <Mic size={16} strokeWidth={1.75} />;
+      return <Microphone size={16} strokeWidth={1.75} />;
     case "video":
-      return <Video size={16} strokeWidth={1.75} />;
+      return <MediaVideo size={16} strokeWidth={1.75} />;
     case "image":
       return <ImageIcon size={16} strokeWidth={1.75} />;
     case "link":
@@ -27,7 +17,7 @@ function getMaterialIcon(type?: string) {
     case "document":
     case "text":
     default:
-      return <FileText size={16} strokeWidth={1.75} />;
+      return <Page size={16} strokeWidth={1.75} />;
   }
 }
 
@@ -133,7 +123,7 @@ export function ReviewQueueList({
       <div className="space-y-3 pt-2">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-bold text-text-primary flex items-center gap-2">
-            <CheckCircle2 size={16} strokeWidth={1.75} className="text-emerald-500" />
+            <CheckCircle size={16} strokeWidth={1.75} className="text-emerald-500" />
             Resolved Reviews
           </h2>
           <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-bg-subtle border border-border-color text-text-primary">
@@ -162,7 +152,7 @@ export function ReviewQueueList({
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="p-2 rounded-lg bg-bg-subtle border border-border-color text-emerald-500 shrink-0">
-                      <CheckCircle2 size={16} strokeWidth={1.75} />
+                      <CheckCircle size={16} strokeWidth={1.75} />
                     </div>
                     <div className="min-w-0">
                       <h3 className="text-xs sm:text-sm font-bold text-text-primary truncate">
@@ -185,7 +175,7 @@ export function ReviewQueueList({
                         className="px-2.5 py-1 rounded-lg text-xs font-medium bg-bg-subtle hover:bg-slate-200 dark:hover:bg-slate-800 text-text-primary border border-border-color transition-colors inline-flex items-center gap-1 cursor-pointer"
                         title="View accepted Concept in Knowledge Base"
                       >
-                        <BookOpen size={12} strokeWidth={1.75} />
+                        <BookStack size={12} strokeWidth={1.75} />
                         <span>View Concept</span>
                       </button>
                     )}
